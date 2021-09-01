@@ -1,15 +1,22 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+
+import { createPost } from "../../actions/posts";
 
 const Form = () => {
+  const dispatch = useDispatch();
   const [postData, setPostData] = useState({
     creator: "",
     title: "",
     message: "",
     tags: "",
   });
-  const handleSubmit = () => {};
-  const clear = (e) => {
-    e.preventDefault();
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    dispatch(createPost(postData));
+  };
+  const clear = (event) => {
+    event.preventDefault();
     setPostData({ creator: "", title: "", message: "", tags: "" });
   };
   return (

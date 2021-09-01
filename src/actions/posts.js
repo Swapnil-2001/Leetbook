@@ -2,8 +2,10 @@ import * as api from "../api";
 
 export const getPosts = () => async (dispatch) => {
   try {
+    dispatch({ type: "START_LOADING" });
     const { data } = await api.fetchPosts();
     dispatch({ type: "FETCH_ALL", payload: data });
+    dispatch({ type: "STOP_LOADING" });
   } catch (error) {
     console.log(error.message);
   }

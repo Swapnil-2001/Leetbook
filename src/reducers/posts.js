@@ -1,9 +1,13 @@
-const reducer = (state = [], action) => {
+const reducer = (state = { isLoading: true, posts: [] }, action) => {
   switch (action.type) {
+    case "START_LOADING":
+      return { ...state, isLoading: true };
+    case "STOP_LOADING":
+      return { ...state, isLoading: false };
     case "FETCH_ALL":
-      return action.payload;
+      return { ...state, posts: action.payload };
     case "CREATE":
-      return [action.payload, ...state];
+      return { ...state, posts: [action.payload, ...state.posts] };
     default:
       return state;
   }

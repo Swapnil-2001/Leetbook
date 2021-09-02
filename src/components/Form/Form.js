@@ -1,24 +1,40 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
-import { createPost } from "../../actions/posts";
+import { createPost, updatePost } from "../../actions/posts";
 
 const Form = () => {
   const dispatch = useDispatch();
+  const idOfPost = useSelector((state) => state.editId);
+  const { posts } = useSelector((state) => state.posts);
+  const post = idOfPost ? posts.find((p) => idOfPost === p._id) : null;
   const [postData, setPostData] = useState({
     creator: "",
     title: "",
     message: "",
     tags: "",
   });
+
+  useEffect(() => {
+    if (post) setPostData(post);
+  }, [post]);
+
+  const clear = () => {
+    setPostData({ creator: "", title: "", message: "", tags: "" });
+    dispatch({ type: "REMOVE_ID" });
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    dispatch(createPost(postData));
+    if (idOfPost) {
+      dispatch(updatePost(idOfPost, postData));
+    } else {
+      dispatch(createPost(postData));
+    }
+    dispatch({ type: "REMOVE_ID" });
+    clear();
   };
-  const clear = (event) => {
-    event.preventDefault();
-    setPostData({ creator: "", title: "", message: "", tags: "" });
-  };
+
   return (
     <div>
       <form autoComplete="off" noValidate onSubmit={handleSubmit}>

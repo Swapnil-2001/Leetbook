@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { createPost, updatePost } from "../../actions/posts";
+import { REMOVE_ID } from "../../constants/actionTypes";
 
 const Form = () => {
   const dispatch = useDispatch();
@@ -21,7 +22,7 @@ const Form = () => {
 
   const clear = () => {
     setPostData({ creator: "", title: "", message: "", tags: "" });
-    dispatch({ type: "REMOVE_ID" });
+    dispatch({ type: REMOVE_ID });
   };
 
   const handleSubmit = (event) => {
@@ -31,7 +32,7 @@ const Form = () => {
     } else {
       dispatch(createPost(postData));
     }
-    dispatch({ type: "REMOVE_ID" });
+    dispatch({ type: REMOVE_ID });
     clear();
   };
 

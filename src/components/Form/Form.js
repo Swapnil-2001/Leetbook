@@ -61,7 +61,9 @@ const Form = () => {
           onChange={(e) => setPostData({ ...postData, tags: e.target.value })}
         />
         <button type="submit">Submit</button>
-        <button onClick={clear}>Clear</button>
+        <button type="button" onClick={clear}>
+          Clear
+        </button>
       </form>
     </div>
   );

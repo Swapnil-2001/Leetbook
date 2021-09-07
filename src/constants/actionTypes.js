@@ -8,3 +8,6 @@ export const DELETE = "DELETE";
 
 export const SET_ID = "SET_ID";
 export const REMOVE_ID = "REMOVE_ID";
+
+export const AUTH = "AUTH";
+export const LOGOUT = "LOGOUT";

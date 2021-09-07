@@ -10,7 +10,6 @@ const Posts = () => {
     <BounceLoader />
   ) : (
     <div>
-      Posts
       {posts.map((post) => (
         <div key={post._id} style={{ background: "lightGray" }}>
           <Post post={post} />

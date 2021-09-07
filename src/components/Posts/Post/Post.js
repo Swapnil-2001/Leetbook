@@ -4,13 +4,14 @@ import { useDispatch } from "react-redux";
 
 import { deletePost, likePost } from "../../../actions/posts";
 import { SET_ID } from "../../../constants/actionTypes";
+import "./Post.css";
 
 const Post = ({
   post: { _id, title, creator, message, createdAt, likeCount },
 }) => {
   const dispatch = useDispatch();
   return (
-    <>
+    <div className="post__div">
       <p>{title}</p>
       <p>{creator}</p>
       <div>{message}</div>
@@ -20,7 +21,7 @@ const Post = ({
       </button>
       <button onClick={() => dispatch(likePost(_id))}>Likes {likeCount}</button>
       <button onClick={() => dispatch(deletePost(_id))}>Delete</button>
-    </>
+    </div>
   );
 };
 

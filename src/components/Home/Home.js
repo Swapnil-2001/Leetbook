@@ -12,8 +12,8 @@ const Home = () => {
   }, [dispatch]);
   return (
     <div>
-      <Posts />
       <Form />
+      <Posts />
     </div>
   );
 };

@@ -6,15 +6,33 @@ import { useHistory } from "react-router-dom";
 import Input from "./input";
 import Icon from "./icon";
 import { AUTH } from "../../constants/actionTypes";
+import { signin, signup } from "../../actions/auth";
 
 const Auth = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+  });
   const dispatch = useDispatch();
   const history = useHistory();
   let signedUp = false;
 
-  const handleChange = () => {};
-  const handleSubmit = () => {};
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormData({ ...formData, [name]: value });
+  };
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    if (signedUp) {
+      dispatch(signin(formData, history));
+    } else {
+      dispatch(signup(formData, history));
+    }
+  };
   const handleShowPassword = () => setShowPassword((prevState) => !prevState);
   const googleSuccess = async (res) => {
     const result = res?.profileObj;

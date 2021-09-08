@@ -7,20 +7,45 @@ import { SET_ID } from "../../../constants/actionTypes";
 import "./Post.css";
 
 const Post = ({
-  post: { _id, title, creator, message, createdAt, likeCount },
+  post: { _id, title, name, likes, message, createdAt, creator },
 }) => {
   const dispatch = useDispatch();
+  const user = JSON.parse(localStorage.getItem("profile"));
+  const Likes = () => {
+    if (likes.length > 0) {
+      return likes.find(
+        (id) => id === user?.result?.googleId || user?.result?._id
+      ) ? (
+        <>
+          {likes.length}&nbsp;like{likes.length > 1 && "s"}
+        </>
+      ) : (
+        <>
+          {likes.length}&nbsp;like{likes.length > 1 && "s"}
+        </>
+      );
+    }
+    return <>0 likes</>;
+  };
   return (
     <div className="post__div">
       <p>{title}</p>
-      <p>{creator}</p>
+      <p>{name}</p>
       <div>{message}</div>
       <span>{moment(createdAt).utc().fromNow()}</span>
-      <button onClick={() => dispatch({ type: SET_ID, payload: _id })}>
-        Edit
+      {(creator === user?.result?.googleId ||
+        creator === user?.result?._id) && (
+        <button onClick={() => dispatch({ type: SET_ID, payload: _id })}>
+          Edit
+        </button>
+      )}
+      <button disabled={!user?.result} onClick={() => dispatch(likePost(_id))}>
+        <Likes />
       </button>
-      <button onClick={() => dispatch(likePost(_id))}>Likes {likeCount}</button>
-      <button onClick={() => dispatch(deletePost(_id))}>Delete</button>
+      {(creator === user?.result?.googleId ||
+        creator === user?.result?._id) && (
+        <button onClick={() => dispatch(deletePost(_id))}>Delete</button>
+      )}
     </div>
   );
 };

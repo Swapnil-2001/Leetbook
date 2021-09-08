@@ -8,29 +8,30 @@ const Form = () => {
   const dispatch = useDispatch();
   const idOfPost = useSelector((state) => state.editId);
   const { posts } = useSelector((state) => state.posts);
-  const post = idOfPost ? posts.find((p) => idOfPost === p._id) : null;
+  const user = JSON.parse(localStorage.getItem("profile"));
+
   const [postData, setPostData] = useState({
-    creator: "",
     title: "",
     message: "",
     tags: "",
   });
 
+  const post = idOfPost ? posts.find((p) => idOfPost === p._id) : null;
   useEffect(() => {
     if (post) setPostData(post);
   }, [post]);
 
   const clear = () => {
-    setPostData({ creator: "", title: "", message: "", tags: "" });
+    setPostData({ title: "", message: "", tags: "" });
     dispatch({ type: REMOVE_ID });
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
     if (idOfPost) {
-      dispatch(updatePost(idOfPost, postData));
+      dispatch(updatePost(idOfPost, { ...postData, name: user?.result?.name }));
     } else {
-      dispatch(createPost(postData));
+      dispatch(createPost({ ...postData, name: user?.result?.name }));
     }
     dispatch({ type: REMOVE_ID });
     clear();
@@ -38,33 +39,31 @@ const Form = () => {
 
   return (
     <div>
-      <form autoComplete="off" noValidate onSubmit={handleSubmit}>
-        <h3>Create a post</h3>
-        <textarea
-          value={postData.creator}
-          onChange={(e) =>
-            setPostData({ ...postData, creator: e.target.value })
-          }
-        />
-        <textarea
-          value={postData.title}
-          onChange={(e) => setPostData({ ...postData, title: e.target.value })}
-        />
-        <textarea
-          value={postData.message}
-          onChange={(e) =>
-            setPostData({ ...postData, message: e.target.value })
-          }
-        />
-        <textarea
-          value={postData.tags}
-          onChange={(e) => setPostData({ ...postData, tags: e.target.value })}
-        />
-        <button type="submit">Submit</button>
-        <button type="button" onClick={clear}>
-          Clear
-        </button>
-      </form>
+      {user && (
+        <form autoComplete="off" noValidate onSubmit={handleSubmit}>
+          <h3>Create a post</h3>
+          <textarea
+            value={postData.title}
+            onChange={(e) =>
+              setPostData({ ...postData, title: e.target.value })
+            }
+          />
+          <textarea
+            value={postData.message}
+            onChange={(e) =>
+              setPostData({ ...postData, message: e.target.value })
+            }
+          />
+          <textarea
+            value={postData.tags}
+            onChange={(e) => setPostData({ ...postData, tags: e.target.value })}
+          />
+          <button type="submit">Submit</button>
+          <button type="button" onClick={clear}>
+            Clear
+          </button>
+        </form>
+      )}
     </div>
   );
 };

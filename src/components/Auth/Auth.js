@@ -10,6 +10,7 @@ import { signin, signup } from "../../actions/auth";
 
 const Auth = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const [signedUp, setSignedUp] = useState(true);
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -19,7 +20,6 @@ const Auth = () => {
   });
   const dispatch = useDispatch();
   const history = useHistory();
-  let signedUp = false;
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -95,6 +95,28 @@ const Auth = () => {
           cookiePolicy="single_host_origin"
         />
         <button type="submit">{signedUp ? "Sign In" : "Sign Up"}</button>
+        {signedUp && (
+          <p>
+            Don't have an account?{" "}
+            <span
+              style={{ cursor: "pointer" }}
+              onClick={() => setSignedUp(false)}
+            >
+              Sign up!
+            </span>
+          </p>
+        )}
+        {!signedUp && (
+          <p>
+            Have an account?{" "}
+            <span
+              style={{ cursor: "pointer" }}
+              onClick={() => setSignedUp(true)}
+            >
+              Login!
+            </span>
+          </p>
+        )}
       </form>
     </div>
   );

@@ -7,6 +7,7 @@ import Input from "./input";
 import Icon from "./icon";
 import { AUTH } from "../../constants/actionTypes";
 import { signin, signup } from "../../actions/auth";
+import "./Auth.css";
 
 const Auth = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -47,10 +48,9 @@ const Auth = () => {
   const googleFailure = () => console.log("Google Sign In Was Unsuccessful!");
   return (
     <div>
-      <div>
-        {/* <img src="" alt="avatar" /> */}
-        <span>{signedUp ? "Login" : "Sign Up"}</span>
-      </div>
+      <div className="shape1" />
+      <div className="shape2" />
+      <span>{signedUp ? "Login" : "Sign Up"}</span>
       <form onSubmit={handleSubmit}>
         {!signedUp && (
           <>

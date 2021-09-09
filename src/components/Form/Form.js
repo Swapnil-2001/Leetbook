@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { createPost, updatePost } from "../../actions/posts";
 import { REMOVE_ID } from "../../constants/actionTypes";
+import "./Form.css";
 
 const Form = () => {
   const dispatch = useDispatch();

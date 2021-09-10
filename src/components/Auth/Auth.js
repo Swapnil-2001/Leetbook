@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { GoogleLogin } from "react-google-login";
 import { useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 
 import Input from "./input";
 import Icon from "./icon";
@@ -48,8 +48,6 @@ const Auth = () => {
   const googleFailure = () => console.log("Google Sign In Was Unsuccessful!");
   return (
     <div>
-      <div className="shape1" />
-      <div className="shape2" />
       <span>{signedUp ? "Login" : "Sign Up"}</span>
       <form onSubmit={handleSubmit}>
         {!signedUp && (
@@ -118,6 +116,7 @@ const Auth = () => {
           </p>
         )}
       </form>
+      <Link to="/reset">Forgot Password?</Link>
     </div>
   );
 };

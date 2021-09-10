@@ -30,7 +30,9 @@ const Navbar = () => {
   return (
     <div className="navbar">
       <span className="navbar__logo">
-        <h3>Leetbook</h3>
+        <Link to="/">
+          <h3 style={{ color: "white" }}>Leetbook</h3>
+        </Link>
       </span>
       <div className="login__div">
         {user ? (

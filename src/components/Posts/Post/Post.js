@@ -7,7 +7,7 @@ import { SET_ID } from "../../../constants/actionTypes";
 import "./Post.css";
 
 const Post = ({
-  post: { _id, title, name, likes, message, createdAt, creator },
+  post: { _id, title, name, likes, message, createdAt, creator, tags },
 }) => {
   const dispatch = useDispatch();
   const user = JSON.parse(localStorage.getItem("profile"));
@@ -33,6 +33,7 @@ const Post = ({
       <p>{name}</p>
       <div>{message}</div>
       <span>{moment(createdAt).utc().fromNow()}</span>
+      <div>{tags.map((tag) => `#${tag.trim()} `)}</div>
       {(creator === user?.result?.googleId ||
         creator === user?.result?._id) && (
         <button onClick={() => dispatch({ type: SET_ID, payload: _id })}>

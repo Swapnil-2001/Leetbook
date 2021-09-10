@@ -14,7 +14,7 @@ const Form = () => {
   const [postData, setPostData] = useState({
     title: "",
     message: "",
-    tags: "",
+    tags: [],
   });
 
   const post = idOfPost ? posts.find((p) => idOfPost === p._id) : null;
@@ -23,7 +23,7 @@ const Form = () => {
   }, [post]);
 
   const clear = () => {
-    setPostData({ title: "", message: "", tags: "" });
+    setPostData({ title: "", message: "", tags: [] });
     dispatch({ type: REMOVE_ID });
   };
 
@@ -57,7 +57,9 @@ const Form = () => {
           />
           <textarea
             value={postData.tags}
-            onChange={(e) => setPostData({ ...postData, tags: e.target.value })}
+            onChange={(e) =>
+              setPostData({ ...postData, tags: e.target.value.split(",") })
+            }
           />
           <button type="submit">Submit</button>
           <button type="button" onClick={clear}>

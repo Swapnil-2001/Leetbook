@@ -37,8 +37,8 @@ const Navbar = () => {
       <div className="login__div">
         {user ? (
           <div>
-            <img alt={user.result.name} src={user.result.imageUrl} />
-            <h6>{user.result.name}</h6>
+            {/* <img alt={user.result.name} src={user.result.imageUrl} /> */}
+            <h3 style={{ color: "white" }}>{user.result.name}</h3>
             <button onClick={logout}>Logout</button>
           </div>
         ) : (

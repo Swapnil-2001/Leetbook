@@ -1,6 +1,7 @@
 import {
   START_LOADING,
   FETCH_ALL,
+  FETCH_POST,
   FETCH_BY_SEARCH,
   STOP_LOADING,
   CREATE,
@@ -9,7 +10,10 @@ import {
   LIKE,
 } from "../constants/actionTypes";
 
-const reducer = (state = { isLoading: true, posts: [] }, action) => {
+const reducer = (
+  state = { isLoading: true, posts: [], post: null },
+  action
+) => {
   switch (action.type) {
     case START_LOADING:
       return { ...state, isLoading: true };
@@ -22,6 +26,8 @@ const reducer = (state = { isLoading: true, posts: [] }, action) => {
         currentPage: action.payload.currentPage,
         numberOfPages: action.payload.numberOfPages,
       };
+    case FETCH_POST:
+      return { ...state, post: action.payload };
     case FETCH_BY_SEARCH:
       return { ...state, posts: action.payload };
     case CREATE:

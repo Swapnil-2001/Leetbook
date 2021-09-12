@@ -2,6 +2,7 @@ import * as api from "../api";
 import {
   START_LOADING,
   FETCH_ALL,
+  FETCH_POST,
   FETCH_BY_SEARCH,
   STOP_LOADING,
   CREATE,
@@ -15,6 +16,17 @@ export const getPosts = (page) => async (dispatch) => {
     dispatch({ type: START_LOADING });
     const { data } = await api.fetchPosts(page);
     dispatch({ type: FETCH_ALL, payload: data });
+    dispatch({ type: STOP_LOADING });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getPost = (id) => async (dispatch) => {
+  try {
+    dispatch({ type: START_LOADING });
+    const { data } = await api.fetchPost(id);
+    dispatch({ type: FETCH_POST, payload: data });
     dispatch({ type: STOP_LOADING });
   } catch (error) {
     console.log(error);

@@ -1,15 +1,15 @@
 import React from "react";
 import moment from "moment";
 import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 
 import { deletePost, likePost } from "../../../actions/posts";
 import { SET_ID } from "../../../constants/actionTypes";
-import "./Post.css";
 
-const Post = ({
-  post: { _id, title, name, likes, message, createdAt, creator, tags },
-}) => {
+const Post = ({ post }) => {
+  const { _id, title, name, likes, message, createdAt, creator, tags } = post;
   const dispatch = useDispatch();
+  const history = useHistory();
   const user = JSON.parse(localStorage.getItem("profile"));
   const Likes = () => {
     if (likes.length > 0) {
@@ -27,13 +27,20 @@ const Post = ({
     }
     return <>0 likes</>;
   };
+
+  const openPost = () => {
+    history.push(`/posts/${post._id}`);
+  };
+
   return (
-    <div className="post__div">
-      <p>{title}</p>
-      <p>{name}</p>
-      <div>{message}</div>
-      <span>{moment(createdAt).utc().fromNow()}</span>
-      <div>{tags.map((tag) => `#${tag.trim()} `)}</div>
+    <div>
+      <div onClick={openPost}>
+        <p>{title}</p>
+        <p>{name}</p>
+        <div>{message}</div>
+        <span>{moment(createdAt).utc().fromNow()}</span>
+        <div>{tags.map((tag) => `#${tag.trim()} `)}</div>
+      </div>
       {(creator === user?.result?.googleId ||
         creator === user?.result?._id) && (
         <button onClick={() => dispatch({ type: SET_ID, payload: _id })}>

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import ChipInput from "material-ui-chip-input";
 
 import { createPost, updatePost } from "../../actions/posts";
 import { REMOVE_ID } from "../../constants/actionTypes";
@@ -27,8 +28,15 @@ const Form = () => {
     dispatch({ type: REMOVE_ID });
   };
 
+  const handleAdd = (tag) =>
+    setPostData({ ...postData, tags: [...postData.tags, tag.trim()] });
+
+  const handleDelete = (tag) =>
+    setPostData({ ...postData, tags: postData.tags.filter((t) => t !== tag) });
+
   const handleSubmit = (event) => {
     event.preventDefault();
+
     if (idOfPost) {
       dispatch(updatePost(idOfPost, { ...postData, name: user?.result?.name }));
     } else {
@@ -55,11 +63,13 @@ const Form = () => {
               setPostData({ ...postData, message: e.target.value })
             }
           />
-          <textarea
+          <ChipInput
+            style={{ margin: "10px 0" }}
             value={postData.tags}
-            onChange={(e) =>
-              setPostData({ ...postData, tags: e.target.value.split(",") })
-            }
+            onAdd={handleAdd}
+            onDelete={handleDelete}
+            label="Add Tags"
+            variant="outlined"
           />
           <button type="submit">Submit</button>
           <button type="button" onClick={clear}>

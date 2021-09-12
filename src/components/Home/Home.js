@@ -23,7 +23,10 @@ const Home = () => {
   const [tags, setTags] = useState([]);
 
   useEffect(() => {
-    if ((!search && searchQuery !== "none") || (!tags.length && tagsQuery)) {
+    if (
+      (!search && searchQuery !== "none" && searchQuery) ||
+      (!tags.length && tagsQuery)
+    ) {
       history.push("/posts");
     }
   }, [searchQuery, tagsQuery, history, search, tags]);

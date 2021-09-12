@@ -2,6 +2,7 @@ import * as api from "../api";
 import {
   START_LOADING,
   FETCH_ALL,
+  FETCH_BY_SEARCH,
   STOP_LOADING,
   CREATE,
   UPDATE,
@@ -9,12 +10,21 @@ import {
   LIKE,
 } from "../constants/actionTypes";
 
-export const getPosts = () => async (dispatch) => {
+export const getPosts = (page) => async (dispatch) => {
   try {
     dispatch({ type: START_LOADING });
-    const { data } = await api.fetchPosts();
+    const { data } = await api.fetchPosts(page);
     dispatch({ type: FETCH_ALL, payload: data });
     dispatch({ type: STOP_LOADING });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getPostsBySearch = (searchQuery) => async (dispatch) => {
+  try {
+    const { data } = await api.fetchPostsBySearch(searchQuery);
+    dispatch({ type: FETCH_BY_SEARCH, payload: data });
   } catch (error) {
     console.log(error);
   }

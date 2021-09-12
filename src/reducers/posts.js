@@ -1,6 +1,7 @@
 import {
   START_LOADING,
   FETCH_ALL,
+  FETCH_BY_SEARCH,
   STOP_LOADING,
   CREATE,
   UPDATE,
@@ -15,6 +16,13 @@ const reducer = (state = { isLoading: true, posts: [] }, action) => {
     case STOP_LOADING:
       return { ...state, isLoading: false };
     case FETCH_ALL:
+      return {
+        ...state,
+        posts: action.payload.data,
+        currentPage: action.payload.currentPage,
+        numberOfPages: action.payload.numberOfPages,
+      };
+    case FETCH_BY_SEARCH:
       return { ...state, posts: action.payload };
     case CREATE:
       return { ...state, posts: [action.payload, ...state.posts] };

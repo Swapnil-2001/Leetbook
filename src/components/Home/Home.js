@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useLocation, useHistory } from "react-router-dom";
 import ChipInput from "material-ui-chip-input";
@@ -18,8 +18,15 @@ const Home = () => {
   const query = useQuery();
   const page = query.get("page") || 1;
   const searchQuery = query.get("searchQuery");
+  const tagsQuery = query.get("tags");
   const [search, setSearch] = useState("");
   const [tags, setTags] = useState([]);
+
+  useEffect(() => {
+    if ((!search && searchQuery !== "none") || (!tags.length && tagsQuery)) {
+      history.push("/posts");
+    }
+  }, [searchQuery, tagsQuery, history, search, tags]);
 
   const handleAdd = (tag) => setTags([...tags, tag.trim()]);
 
@@ -28,7 +35,7 @@ const Home = () => {
 
   const searchPost = (event) => {
     event.preventDefault();
-    if (search.trim() || tags) {
+    if (search.trim() || tags.length) {
       dispatch(getPostsBySearch({ search, tags: tags.join(",") }));
       history.push(
         `/posts/search?searchQuery=${search || "none"}&tags=${tags.join(",")}`
@@ -36,6 +43,11 @@ const Home = () => {
     } else {
       history.push("/");
     }
+  };
+
+  const clearSearches = () => {
+    setTags([]);
+    setSearch("");
   };
 
   const handleKeyPress = (e) => {
@@ -60,8 +72,11 @@ const Home = () => {
           variant="outlined"
         />
         <button onClick={searchPost}>Search Post</button>
+        <button type="button" onClick={clearSearches}>
+          Clear search
+        </button>
       </div>
-      <Pagination page={page} />
+      {!searchQuery && !tagsQuery && <Pagination page={page} />}
       <Posts />
     </div>
   );

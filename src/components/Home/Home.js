@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { useLocation, useHistory } from "react-router-dom";
+import { Link, useLocation, useHistory } from "react-router-dom";
 import ChipInput from "material-ui-chip-input";
 
 import { getPostsBySearch } from "../../actions/posts";
 import Posts from "../Posts/Posts";
-import Form from "../Form/Form";
 import Pagination from "../Pagination";
 
 function useQuery() {
@@ -13,6 +12,7 @@ function useQuery() {
 }
 
 const Home = () => {
+  const user = JSON.parse(localStorage.getItem("profile"));
   const dispatch = useDispatch();
   const history = useHistory();
   const query = useQuery();
@@ -59,7 +59,7 @@ const Home = () => {
 
   return (
     <div>
-      <Form />
+      {user && <Link to="/posts/create">New Post +</Link>}
       <div>
         <input
           value={search}

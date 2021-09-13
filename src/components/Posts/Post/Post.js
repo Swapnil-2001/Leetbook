@@ -43,7 +43,12 @@ const Post = ({ post }) => {
       </div>
       {(creator === user?.result?.googleId ||
         creator === user?.result?._id) && (
-        <button onClick={() => dispatch({ type: SET_ID, payload: _id })}>
+        <button
+          onClick={() => {
+            dispatch({ type: SET_ID, payload: _id });
+            history.push("/posts/create");
+          }}
+        >
           Edit
         </button>
       )}

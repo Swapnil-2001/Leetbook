@@ -7,6 +7,7 @@ import {
 } from "react-router-dom";
 
 import Home from "./components/Home/Home";
+import Form from "./components/Form/Form";
 import Auth from "./components/Auth/Auth";
 import Navbar from "./components/Navbar/Navbar";
 import PostDetails from "./components/PostDetails/PostDetails";
@@ -20,15 +21,20 @@ const App = () => {
     <Router>
       <Navbar />
       <Switch>
-        <Route exact path="/" component={() => <Redirect to="/posts" />} />
-        <Route exact path="/posts" component={Home} />
-        <Route path="/posts/search" component={Home} />
-        <Route path="/posts/:id" component={PostDetails} />
         <Route
           exact
           path="/auth"
           component={() => (!user ? <Auth /> : <Redirect to="/posts" />)}
         />
+        <Route exact path="/" component={() => <Redirect to="/posts" />} />
+        <Route exact path="/posts" component={Home} />
+        <Route path="/posts/search" component={Home} />
+        <Route
+          exact
+          path="/posts/create"
+          component={() => (user ? <Form /> : <Redirect to="/posts" />)}
+        />
+        <Route path="/posts/:id" component={PostDetails} />
         <Route exact path="/reset" component={PasswordReset} />
         <Route path="/reset/:id" component={EmailRedirect} />
       </Switch>

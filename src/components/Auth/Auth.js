@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { GoogleLogin } from "react-google-login";
 import { useDispatch } from "react-redux";
 import { useHistory, Link } from "react-router-dom";
@@ -10,6 +10,11 @@ import { signin, signup } from "../../actions/auth";
 import "./Auth.css";
 
 const Auth = () => {
+  const user = JSON.parse(localStorage.getItem("profile"));
+  const history = useHistory();
+  useEffect(() => {
+    if (user) history.push("/");
+  }, [user, history]);
   const [showPassword, setShowPassword] = useState(false);
   const [signedUp, setSignedUp] = useState(true);
   const [formData, setFormData] = useState({
@@ -19,8 +24,8 @@ const Auth = () => {
     password: "",
     confirmPassword: "",
   });
+
   const dispatch = useDispatch();
-  const history = useHistory();
 
   const handleChange = (event) => {
     const { name, value } = event.target;

@@ -19,6 +19,10 @@ const Form = () => {
   const { posts } = useSelector((state) => state.posts);
   const user = JSON.parse(localStorage.getItem("profile"));
 
+  useEffect(() => {
+    if (!user) history.push("/auth");
+  }, [user, history]);
+
   const [postData, setPostData] = useState({
     title: "",
     message: "",

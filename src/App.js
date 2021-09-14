@@ -16,26 +16,17 @@ import EmailRedirect from "./components/PasswordReset/EmailRedirect";
 import "./App.css";
 
 const App = () => {
-  const user = JSON.parse(localStorage.getItem("profile"));
   return (
     <Router>
       <Navbar />
       <Switch>
-        <Route
-          exact
-          path="/auth"
-          component={() => (!user ? <Auth /> : <Redirect to="/posts" />)}
-        />
         <Route exact path="/" component={() => <Redirect to="/posts" />} />
+        <Route exact path="/auth" component={Auth} />
         <Route exact path="/posts" component={Home} />
-        <Route path="/posts/search" component={Home} />
-        <Route
-          exact
-          path="/posts/create"
-          component={() => (user ? <Form /> : <Redirect to="/posts" />)}
-        />
-        <Route path="/posts/:id" component={PostDetails} />
+        <Route exact path="/posts/create" component={Form} />
         <Route exact path="/reset" component={PasswordReset} />
+        <Route path="/posts/search" component={Home} />
+        <Route path="/posts/:id" component={PostDetails} />
         <Route path="/reset/:id" component={EmailRedirect} />
       </Switch>
     </Router>

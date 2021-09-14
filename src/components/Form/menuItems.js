@@ -5,6 +5,7 @@ export const menuItems = [
   "Binary Search",
   "DFS",
   "DP",
+  "Graph",
   "Greedy",
   "Hash Table",
   "Heap",

@@ -12,6 +12,10 @@ const Form = () => {
   const [selected, setSelected] = useState(
     new Array(menuItems.length).fill(false)
   );
+  const [error, setError] = useState({
+    title: "",
+    message: "",
+  });
   const dispatch = useDispatch();
   const history = useHistory();
   const classes = useStyles();
@@ -53,6 +57,20 @@ const Form = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
+    if (!postData.title.trim() || !postData.message.trim()) {
+      if (!postData.title.trim())
+        setError((prevState) => ({
+          ...prevState,
+          title: "Title cannot be empty.",
+        }));
+      if (!postData.message.trim())
+        setError((prevState) => ({
+          ...prevState,
+          message: "Message cannot be empty.",
+        }));
+      return;
+    }
+
     if (idOfPost) {
       dispatch(updatePost(idOfPost, { ...postData, name: user?.result?.name }));
     } else {
@@ -71,9 +89,11 @@ const Form = () => {
         noValidate
         onSubmit={handleSubmit}
       >
-        <h3>Create a post</h3>
+        <h3>Create/Edit a Post</h3>
         <TextField
           name="title"
+          error={error.title}
+          helperText={error.title !== "" && error.title}
           variant="outlined"
           label="Title"
           value={postData.title}
@@ -81,6 +101,8 @@ const Form = () => {
         />
         <TextField
           name="message"
+          error={error.message}
+          helperText={error.message !== "" && error.message}
           variant="outlined"
           label="Content"
           multiline

@@ -12,9 +12,20 @@ export default makeStyles((theme) => ({
     marginBottom: "20px",
     transition: "border 0.2s",
     cursor: "pointer",
+    display: "flex",
+    alignItems: "center",
     "&:hover": {
       border: "2px solid #686D76",
     },
+  },
+  leftHalf: {
+    flex: 10,
+  },
+  rightHalf: {
+    flex: 1,
+    display: "flex",
+    flexDirection: "column",
+    textAlign: "center",
   },
   title: {
     marginBottom: "10px",

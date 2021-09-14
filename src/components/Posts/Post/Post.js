@@ -3,6 +3,7 @@ import moment from "moment";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { Chip } from "@material-ui/core";
+import ArrowDropUpIcon from "@material-ui/icons/ArrowDropUpSharp";
 
 import { likePost } from "../../../actions/posts";
 import useStyles from "./styles";
@@ -35,8 +36,8 @@ const Post = ({ post }) => {
   };
 
   return (
-    <div className={classes.wrapper__div}>
-      <div onClick={openPost}>
+    <div onClick={openPost} className={classes.wrapper__div}>
+      <div className={classes.leftHalf}>
         <h3 className={classes.title}>{title}</h3>
         <div>
           {tags.map((tag) => (
@@ -53,9 +54,14 @@ const Post = ({ post }) => {
           Created by {name} {moment(createdAt).utc().fromNow()}
         </p>
       </div>
-      <button disabled={!user?.result} onClick={() => dispatch(likePost(_id))}>
-        <Likes />
-      </button>
+      <div className={classes.rightHalf}>
+        <ArrowDropUpIcon style={{ margin: "0 auto", fontSize: 50 }} />
+        {likes.length}
+        {/* <button
+          disabled={!user?.result}
+          onClick={() => dispatch(likePost(_id))}
+        ></button> */}
+      </div>
     </div>
   );
 };

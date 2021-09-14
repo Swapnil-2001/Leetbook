@@ -20,7 +20,7 @@ const PostDetails = () => {
       dispatch(getPostsBySearch({ search: "none", tags: post.tags.join(",") }));
   }, [post, dispatch]);
 
-  const recommendedPosts = posts?.filter(({ _id }) => _id !== post._id);
+  const recommendedPosts = posts?.filter(({ _id }) => _id !== post?._id);
 
   if (isLoading) return <CircularProgress />;
 

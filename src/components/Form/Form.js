@@ -77,11 +77,12 @@ const Form = () => {
     if (idOfPost) {
       dispatch(updatePost(idOfPost, { ...postData, name: user?.result?.name }));
       dispatch({ type: REMOVE_ID });
+      history.push(`/posts/${idOfPost}`);
     } else {
       dispatch(createPost({ ...postData, name: user?.result?.name }));
+      history.push("/");
     }
     clear();
-    history.push("/");
   };
 
   return (
@@ -92,7 +93,7 @@ const Form = () => {
         noValidate
         onSubmit={handleSubmit}
       >
-        <h2>Create/Edit a Post</h2>
+        <h2>{idOfPost ? "Edit" : "Create"} a Post</h2>
         <TextField
           name="title"
           error={error.title}

@@ -4,6 +4,7 @@ import { Link, useLocation, useHistory } from "react-router-dom";
 import ChipInput from "material-ui-chip-input";
 
 import { getPostsBySearch } from "../../actions/posts";
+import { REMOVE_ID } from "../../constants/actionTypes";
 import Posts from "../Posts/Posts";
 import Pagination from "../Pagination";
 
@@ -23,13 +24,14 @@ const Home = () => {
   const [tags, setTags] = useState([]);
 
   useEffect(() => {
+    dispatch({ type: REMOVE_ID });
     if (
       (!search && searchQuery !== "none" && searchQuery) ||
       (!tags.length && tagsQuery)
     ) {
       history.push("/posts");
     }
-  }, [searchQuery, tagsQuery, history, search, tags]);
+  }, [searchQuery, tagsQuery, history, search, tags, dispatch]);
 
   const handleAdd = (tag) => setTags([...tags, tag.trim()]);
 

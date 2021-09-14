@@ -5,7 +5,13 @@ import { useHistory } from "react-router-dom";
 import moment from "moment";
 import { useParams } from "react-router-dom";
 
-import { getPost, getPostsBySearch, deletePost } from "../../actions/posts";
+import {
+  getPost,
+  getPostsBySearch,
+  likePost,
+  deletePost,
+} from "../../actions/posts";
+import { SET_FETCHED_POST } from "../../constants/actionTypes";
 import { SET_ID } from "../../constants/actionTypes";
 
 const PostDetails = () => {
@@ -47,6 +53,15 @@ const PostDetails = () => {
               Edit
             </button>
           )}
+          <button
+            disabled={!user?.result}
+            onClick={() => {
+              dispatch(likePost(post._id));
+              dispatch({ type: SET_FETCHED_POST, payload: user?.result?._id });
+            }}
+          >
+            {post.likes.length} Like
+          </button>
           {post.creator === user?.result?._id && (
             <button
               onClick={() => {

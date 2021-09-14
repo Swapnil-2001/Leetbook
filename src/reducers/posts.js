@@ -2,6 +2,7 @@ import {
   START_LOADING,
   FETCH_ALL,
   FETCH_POST,
+  SET_FETCHED_POST,
   FETCH_BY_SEARCH,
   STOP_LOADING,
   CREATE,
@@ -28,6 +29,16 @@ const reducer = (
       };
     case FETCH_POST:
       return { ...state, post: action.payload };
+    case SET_FETCHED_POST:
+      return {
+        ...state,
+        post: {
+          ...state.post,
+          likes: state.post.likes.includes(action.payload)
+            ? state.post.likes.filter((id) => id !== action.payload)
+            : [...state.post.likes, action.payload],
+        },
+      };
     case FETCH_BY_SEARCH:
       return { ...state, posts: action.payload };
     case CREATE:

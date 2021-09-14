@@ -7,6 +7,7 @@ import ArrowDropUpIcon from "@material-ui/icons/ArrowDropUpSharp";
 import useStyles from "./styles";
 
 const Post = ({ post }) => {
+  const user = JSON.parse(localStorage.getItem("profile"));
   const { title, name, likes, createdAt, tags } = post;
   const history = useHistory();
   const classes = useStyles();
@@ -35,7 +36,10 @@ const Post = ({ post }) => {
         </p>
       </div>
       <div className={classes.rightHalf}>
-        <ArrowDropUpIcon style={{ margin: "0 auto", fontSize: 50 }} />
+        <ArrowDropUpIcon
+          style={{ margin: "0 auto", fontSize: 50 }}
+          color={likes.includes(user?.result?._id) ? "primary" : "default"}
+        />
         {likes.length}
       </div>
     </div>

@@ -10,6 +10,7 @@ export default makeStyles((theme) => ({
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
+    alignItems: "center",
   },
   create__post__div: {
     margin: "50px 100px",

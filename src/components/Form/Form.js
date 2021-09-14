@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { TextField, Chip } from "@material-ui/core";
+import { TextField, Chip, Button } from "@material-ui/core";
+import SendIcon from "@material-ui/icons/Send";
 
 import { createPost, updatePost } from "../../actions/posts";
 import { menuItems } from "./menuItems";
@@ -173,8 +174,17 @@ const Form = () => {
             />
           ))}
         </div>
-
-        <button type="submit">Submit</button>
+        <Button
+          variant="contained"
+          style={{
+            width: "100px",
+          }}
+          color="primary"
+          type="submit"
+          endIcon={<SendIcon />}
+        >
+          Post
+        </Button>
         <button type="button" onClick={clear}>
           Clear
         </button>

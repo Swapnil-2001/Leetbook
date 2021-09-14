@@ -1,14 +1,18 @@
 import React, { useEffect } from "react";
 import { CircularProgress } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 import moment from "moment";
 import { useParams } from "react-router-dom";
 
-import { getPost, getPostsBySearch } from "../../actions/posts";
+import { getPost, getPostsBySearch, deletePost } from "../../actions/posts";
+import { SET_ID } from "../../constants/actionTypes";
 
 const PostDetails = () => {
+  const user = JSON.parse(localStorage.getItem("profile"));
   const { post, posts, isLoading } = useSelector((state) => state.posts);
   const dispatch = useDispatch();
+  const history = useHistory();
   const { id } = useParams();
 
   useEffect(() => {
@@ -33,6 +37,26 @@ const PostDetails = () => {
           <div>{post.message}</div>
           <span>{moment(post.createdAt).utc().fromNow()}</span>
           <div>{post.tags.map((tag) => `#${tag.trim()} `)}</div>
+          {post.creator === user?.result?._id && (
+            <button
+              onClick={() => {
+                dispatch({ type: SET_ID, payload: post._id });
+                history.push("/posts/create");
+              }}
+            >
+              Edit
+            </button>
+          )}
+          {post.creator === user?.result?._id && (
+            <button
+              onClick={() => {
+                dispatch(deletePost(post._id));
+                history.push("/posts");
+              }}
+            >
+              Delete
+            </button>
+          )}
         </>
       )}
       {recommendedPosts.length > 0 && (

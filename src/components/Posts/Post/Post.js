@@ -2,14 +2,13 @@ import React from "react";
 import moment from "moment";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { Paper, Chip } from "@material-ui/core";
+import { Chip } from "@material-ui/core";
 
-import { deletePost, likePost } from "../../../actions/posts";
-import { SET_ID } from "../../../constants/actionTypes";
+import { likePost } from "../../../actions/posts";
 import useStyles from "./styles";
 
 const Post = ({ post }) => {
-  const { _id, title, name, likes, message, createdAt, creator, tags } = post;
+  const { _id, title, name, likes, createdAt, tags } = post;
   const dispatch = useDispatch();
   const history = useHistory();
   const classes = useStyles();
@@ -54,24 +53,9 @@ const Post = ({ post }) => {
           Created by {name} {moment(createdAt).utc().fromNow()}
         </p>
       </div>
-      {(creator === user?.result?.googleId ||
-        creator === user?.result?._id) && (
-        <button
-          onClick={() => {
-            dispatch({ type: SET_ID, payload: _id });
-            history.push("/posts/create");
-          }}
-        >
-          Edit
-        </button>
-      )}
       <button disabled={!user?.result} onClick={() => dispatch(likePost(_id))}>
         <Likes />
       </button>
-      {(creator === user?.result?.googleId ||
-        creator === user?.result?._id) && (
-        <button onClick={() => dispatch(deletePost(_id))}>Delete</button>
-      )}
     </div>
   );
 };

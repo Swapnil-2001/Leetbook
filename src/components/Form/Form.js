@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { TextField, Chip, Button } from "@material-ui/core";
 import SendIcon from "@material-ui/icons/Send";
+import ClearIcon from "@material-ui/icons/Clear";
 
 import { createPost, updatePost } from "../../actions/posts";
 import { menuItems } from "./menuItems";
@@ -75,10 +76,10 @@ const Form = () => {
 
     if (idOfPost) {
       dispatch(updatePost(idOfPost, { ...postData, name: user?.result?.name }));
+      dispatch({ type: REMOVE_ID });
     } else {
       dispatch(createPost({ ...postData, name: user?.result?.name }));
     }
-    dispatch({ type: REMOVE_ID });
     clear();
     history.push("/");
   };
@@ -91,10 +92,11 @@ const Form = () => {
         noValidate
         onSubmit={handleSubmit}
       >
-        <h3>Create/Edit a Post</h3>
+        <h2>Create/Edit a Post</h2>
         <TextField
           name="title"
           error={error.title}
+          style={{ marginTop: "50px", width: "70%" }}
           helperText={error.title !== "" && error.title}
           variant="outlined"
           label="Title"
@@ -104,6 +106,7 @@ const Form = () => {
         <TextField
           name="message"
           error={error.message}
+          style={{ marginTop: "25px", width: "70%" }}
           helperText={error.message !== "" && error.message}
           variant="outlined"
           label="Content"
@@ -149,14 +152,7 @@ const Form = () => {
             variant="outlined"
           />
         </div> */}
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            flexWrap: "wrap",
-            margin: "0 150px",
-          }}
-        >
+        <div className={classes.tagsDiv}>
           {menuItems.map((item, index) => (
             <Chip
               label={item}
@@ -175,19 +171,24 @@ const Form = () => {
           ))}
         </div>
         <Button
+          className={classes.button}
+          style={{ fontWeight: "600" }}
           variant="contained"
-          style={{
-            width: "100px",
-          }}
+          type="button"
+          onClick={clear}
+          endIcon={<ClearIcon />}
+        >
+          Clear
+        </Button>
+        <Button
+          variant="contained"
+          className={classes.button}
           color="primary"
           type="submit"
           endIcon={<SendIcon />}
         >
           Post
         </Button>
-        <button type="button" onClick={clear}>
-          Clear
-        </button>
       </form>
     </div>
   );

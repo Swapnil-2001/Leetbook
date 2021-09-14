@@ -45,6 +45,7 @@ const Form = () => {
 
   const clear = () => {
     setPostData({ title: "", message: "", tags: [] });
+    setSelected(new Array(menuItems.length).fill(false));
     dispatch({ type: REMOVE_ID });
   };
 
@@ -147,7 +148,14 @@ const Form = () => {
             variant="outlined"
           />
         </div> */}
-        <div style={{ display: "flex" }}>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            flexWrap: "wrap",
+            margin: "0 150px",
+          }}
+        >
           {menuItems.map((item, index) => (
             <Chip
               label={item}
@@ -159,7 +167,9 @@ const Form = () => {
                   selected.map((value, ind) => (ind === index ? !value : value))
                 );
               }}
-              color={selected[index] ? "primary" : "secondary"}
+              variant={selected[index] ? "default" : "outlined"}
+              color="primary"
+              style={{ margin: "20px 5px 0 5px" }}
             />
           ))}
         </div>

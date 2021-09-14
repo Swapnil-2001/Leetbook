@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Avatar } from "@material-ui/core";
 import { Link, useHistory, useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import decode from "jwt-decode";
@@ -37,7 +38,9 @@ const Navbar = () => {
       <div className="login__div">
         {user ? (
           <div>
-            {/* <img alt={user.result.name} src={user.result.imageUrl} /> */}
+            <Avatar style={{ backgroundColor: "#7C83FD" }}>
+              {user.result.name.charAt(0)}
+            </Avatar>
             <h3 style={{ color: "white" }}>{user.result.name}</h3>
             <button onClick={logout}>Logout</button>
           </div>

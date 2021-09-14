@@ -1,1 +1,21 @@
-export const menuItems = ["Array", "Dynamic Programming", "String"];
+export const menuItems = [
+  "Array",
+  "Backtracking",
+  "BFS",
+  "Binary Search",
+  "DFS",
+  "DP",
+  "Greedy",
+  "Hash Table",
+  "Heap",
+  "Linked List",
+  "Math",
+  "Queue",
+  "Sliding Window",
+  "Sorting",
+  "Stack",
+  "String",
+  "Tree",
+  "Trie",
+  "Two Pointers",
+];

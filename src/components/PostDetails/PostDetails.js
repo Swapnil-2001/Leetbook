@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { CircularProgress, Fab, Chip } from "@material-ui/core";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
+import ArrowDropUpIcon from "@material-ui/icons/ArrowDropUp";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import moment from "moment";
@@ -41,9 +42,16 @@ const PostDetails = () => {
   return (
     <>
       {post && (
-        <div style={{ display: "flex", padding: "50px 70px" }}>
+        <div style={{ display: "flex", padding: "50px 70px 50px 30px" }}>
           <div>
-            <button
+            <span
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                cursor: "pointer",
+                marginRight: "30px",
+              }}
               disabled={!user?.result}
               onClick={() => {
                 dispatch(likePost(post._id));
@@ -53,8 +61,20 @@ const PostDetails = () => {
                 });
               }}
             >
-              {post.likes.length} Like
-            </button>
+              <ArrowDropUpIcon
+                style={{
+                  fontSize: 50,
+                  color: post.likes.includes(user?.result?._id)
+                    ? "white"
+                    : "black",
+                  backgroundColor: post.likes.includes(user?.result?._id)
+                    ? "#4b6587"
+                    : "#EFEFEF",
+                  marginBottom: "10px",
+                }}
+              />
+              {post.likes.length}
+            </span>
           </div>
           <div
             style={{

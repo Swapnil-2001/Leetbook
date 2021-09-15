@@ -1,4 +1,5 @@
 import React from "react";
+import { TextField } from "@material-ui/core";
 
 const input = ({
   name,
@@ -8,10 +9,14 @@ const input = ({
   handleShowPassword,
 }) => {
   return (
-    <div style={{ display: "flex" }}>
-      <input
+    <div
+      style={{
+        display: "flex",
+      }}
+    >
+      <TextField
         name={name}
-        placeholder={placeholder}
+        label={placeholder}
         onChange={handleChange}
         type={type}
       />

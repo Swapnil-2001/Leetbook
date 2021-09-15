@@ -51,13 +51,21 @@ const Auth = () => {
   // };
   // const googleFailure = () => console.log("Google Sign In Was Unsuccessful!");
   return (
-    <div>
+    <div style={{ textAlign: "center" }}>
       <span>{signedUp ? "Login" : "Sign Up"}</span>
       <form onSubmit={handleSubmit}>
         {!signedUp && (
           <>
-            <Input name="firstName" handleChange={handleChange} />
-            <Input name="lastName" handleChange={handleChange} />
+            <Input
+              name="firstName"
+              placeholder="First Name"
+              handleChange={handleChange}
+            />
+            <Input
+              name="lastName"
+              placeholder="Last Name"
+              handleChange={handleChange}
+            />
           </>
         )}
         <Input

@@ -23,6 +23,7 @@ const Post = ({ post }) => {
         <div>
           {tags.map((tag) => (
             <Chip
+              key={tag}
               style={{ borderRadius: "5px", marginRight: "10px" }}
               label={tag.trim()}
               clickable
@@ -38,7 +39,7 @@ const Post = ({ post }) => {
       <div className={classes.rightHalf}>
         <ArrowDropUpIcon
           style={{ fontSize: 50 }}
-          color={likes.includes(user?.result?._id) ? "primary" : "default"}
+          color={likes.includes(user?.result?._id) ? "primary" : "inherit"}
         />
         {likes.length}
       </div>

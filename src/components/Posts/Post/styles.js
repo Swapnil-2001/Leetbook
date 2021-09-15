@@ -11,6 +11,7 @@ export default makeStyles((theme) => ({
     padding: "30px",
     marginBottom: "20px",
     transition: "border 0.2s",
+    backgroundColor: "white",
     cursor: "pointer",
     display: "flex",
     alignItems: "center",

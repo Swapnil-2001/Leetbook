@@ -20,4 +20,24 @@ export default makeStyles((theme) => ({
   content: {
     padding: "25px",
   },
+  recommended__div: {
+    textAlign: "center",
+    margin: "15px 0",
+  },
+  recommended__post: {
+    margin: "15px 10px",
+    padding: "20px 50px",
+    border: "1px solid rgba(0, 0, 0, 0.35)",
+    display: "inline-flex",
+    flexDirection: "column",
+    cursor: "pointer",
+    "& p": {
+      fontSize: "0.9rem",
+      marginTop: "5px",
+      color: "#6B7AA1",
+    },
+    "&:hover": {
+      border: "1px solid #686D76",
+    },
+  },
 }));

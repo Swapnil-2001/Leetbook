@@ -141,18 +141,22 @@ const PostDetails = () => {
         </div>
       )}
       {recommendedPosts.length > 0 && (
-        <>
-          <p>You might also like:</p>
-          <div>
-            {recommendedPosts.map((p) => (
-              <>
-                <p>{p.title}</p>
-                <p>{p.name}</p>
-                <div>{p.message}</div>
-              </>
-            ))}
-          </div>
-        </>
+        <div className={classes.recommended__div}>
+          <h3 style={{ color: "#4b6587" }}>You might also like:</h3>
+          {recommendedPosts.slice(0, 6).map((p) => (
+            <div
+              className={classes.recommended__post}
+              onClick={() => history.push(`/posts/${p._id}`)}
+            >
+              <h3>
+                {p.title.length < 25
+                  ? p.title
+                  : p.title.substring(0, 25) + "..."}
+              </h3>
+              <p>{p.name}</p>
+            </div>
+          ))}
+        </div>
       )}
     </>
   );

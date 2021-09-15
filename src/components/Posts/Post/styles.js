@@ -25,13 +25,14 @@ export default makeStyles((theme) => ({
     flex: 1,
     display: "flex",
     flexDirection: "column",
-    textAlign: "center",
+    alignItems: "center",
+    justifyContent: "center",
   },
   title: {
-    marginBottom: "10px",
+    marginBottom: "15px",
   },
   footer: {
-    margin: "10px 0",
+    marginTop: "15px",
     fontSize: "0.9rem",
     color: "#8D93AB",
   },

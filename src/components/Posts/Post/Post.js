@@ -37,7 +37,7 @@ const Post = ({ post }) => {
       </div>
       <div className={classes.rightHalf}>
         <ArrowDropUpIcon
-          style={{ margin: "0 auto", fontSize: 50 }}
+          style={{ fontSize: 50 }}
           color={likes.includes(user?.result?._id) ? "primary" : "default"}
         />
         {likes.length}

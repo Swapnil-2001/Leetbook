@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { Link, useLocation, useHistory } from "react-router-dom";
+import { Button } from "@material-ui/core";
 import ChipInput from "material-ui-chip-input";
+import AddIcon from "@material-ui/icons/Add";
 
 import { getPostsBySearch } from "../../actions/posts";
 import { REMOVE_ID } from "../../constants/actionTypes";
 import Posts from "../Posts/Posts";
 import Pagination from "../Pagination";
+import useStyles from "./styles";
 
 function useQuery() {
   return new URLSearchParams(useLocation().search);
@@ -15,6 +18,7 @@ function useQuery() {
 const Home = () => {
   const user = JSON.parse(localStorage.getItem("profile"));
   const dispatch = useDispatch();
+  const classes = useStyles();
   const history = useHistory();
   const query = useQuery();
   const page = query.get("page") || 1;
@@ -61,7 +65,6 @@ const Home = () => {
 
   return (
     <div>
-      {user && <Link to="/posts/create">New Post +</Link>}
       <div>
         <input
           value={search}
@@ -81,8 +84,26 @@ const Home = () => {
           Clear search
         </button>
       </div>
-      {!searchQuery && !tagsQuery && <Pagination page={page} />}
+      {user && (
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+          }}
+        >
+          <Button
+            component={Link}
+            to="/posts/create"
+            variant="contained"
+            className={classes.new__post__button}
+            endIcon={<AddIcon />}
+          >
+            New Post
+          </Button>
+        </div>
+      )}
       <Posts />
+      {!searchQuery && !tagsQuery && <Pagination page={page} />}
     </div>
   );
 };

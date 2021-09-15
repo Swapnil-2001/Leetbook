@@ -12,19 +12,23 @@ const Paginate = ({ page }) => {
     if (page) dispatch(getPosts(page));
   }, [page, dispatch]);
   return (
-    <Pagination
-      count={numberOfPages}
-      page={Number(page) || 1}
-      variant="outlined"
-      color="primary"
-      renderItem={(item) => (
-        <PaginationItem
-          {...item}
-          component={Link}
-          to={`/posts?page=${item.page}`}
-        />
-      )}
-    />
+    <div
+      style={{ display: "flex", justifyContent: "center", margin: "50px 0" }}
+    >
+      <Pagination
+        count={numberOfPages}
+        page={Number(page) || 1}
+        variant="outlined"
+        color="primary"
+        renderItem={(item) => (
+          <PaginationItem
+            {...item}
+            component={Link}
+            to={`/posts?page=${item.page}`}
+          />
+        )}
+      />
+    </div>
   );
 };
 

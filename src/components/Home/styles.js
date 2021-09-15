@@ -14,4 +14,15 @@ export default makeStyles((theme) => ({
       backgroundColor: "rgba(0, 0, 0, 0.57)",
     },
   },
+  titleSearch: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: "30px",
+  },
+  searchTagsDiv: {
+    textAlign: "center",
+    margin: "25px 50px",
+    marginTop: "10px",
+  },
 }));

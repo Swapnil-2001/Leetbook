@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { Link, useLocation, useHistory } from "react-router-dom";
-import { Button } from "@material-ui/core";
-import ChipInput from "material-ui-chip-input";
+import { Button, Chip, TextField } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
+import SearchIcon from "@material-ui/icons/Search";
 
 import { getPostsBySearch } from "../../actions/posts";
+import { menuItems } from "../Form/menuItems";
 import { REMOVE_ID } from "../../constants/actionTypes";
 import Posts from "../Posts/Posts";
 import Pagination from "../Pagination";
@@ -26,6 +27,9 @@ const Home = () => {
   const tagsQuery = query.get("tags");
   const [search, setSearch] = useState("");
   const [tags, setTags] = useState([]);
+  const [selected, setSelected] = useState(
+    new Array(menuItems.length).fill(false)
+  );
 
   useEffect(() => {
     dispatch({ type: REMOVE_ID });
@@ -57,28 +61,42 @@ const Home = () => {
   const clearSearches = () => {
     setTags([]);
     setSearch("");
-  };
-
-  const handleKeyPress = (e) => {
-    if (e.keyCode === 13) searchPost();
+    setSelected(new Array(menuItems.length).fill(false));
   };
 
   return (
     <div>
       <div>
-        <input
-          value={search}
-          onKeyPress={handleKeyPress}
-          onChange={(e) => setSearch(e.target.value)}
-        />
-        <ChipInput
-          style={{ margin: "10px 0" }}
-          value={tags}
-          onAdd={handleAdd}
-          onDelete={handleDelete}
-          label="Search Tags"
-          variant="outlined"
-        />
+        <div className={classes.titleSearch}>
+          <SearchIcon color="primary" />
+          <TextField
+            name="search"
+            style={{ marginLeft: "10px", width: "40%" }}
+            variant="outlined"
+            label="Search By Title"
+            value={search}
+            autoComplete="off"
+            onChange={(e) => setSearch(e.target.value)}
+          />
+        </div>
+        <div className={classes.searchTagsDiv}>
+          {menuItems.map((item, index) => (
+            <Chip
+              label={item}
+              clickable
+              onClick={() => {
+                if (selected[index]) handleDelete(item);
+                else handleAdd(item);
+                setSelected(
+                  selected.map((value, ind) => (ind === index ? !value : value))
+                );
+              }}
+              variant={selected[index] ? "default" : "outlined"}
+              color="primary"
+              style={{ margin: "20px 5px 0 5px" }}
+            />
+          ))}
+        </div>
         <button onClick={searchPost}>Search Post</button>
         <button type="button" onClick={clearSearches}>
           Clear search

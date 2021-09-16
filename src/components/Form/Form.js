@@ -40,7 +40,7 @@ const Form = () => {
   const [postData, setPostData] = useState({
     title: "",
     message: "",
-    difficulty: "",
+    difficulty: "easy",
     tags: [],
   });
 
@@ -89,8 +89,9 @@ const Form = () => {
       dispatch({ type: REMOVE_ID });
       history.push(`/posts/${idOfPost}`);
     } else {
-      dispatch(createPost({ ...postData, name: user?.result?.username }));
-      history.push("/");
+      dispatch(
+        createPost({ ...postData, name: user?.result?.username }, history)
+      );
     }
     clear();
   };

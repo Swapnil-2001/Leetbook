@@ -43,21 +43,27 @@ const Navbar = () => {
             <Avatar style={{ backgroundColor: "#7C83FD", marginRight: "10px" }}>
               {user.result.name.charAt(0)}
             </Avatar>
-            <h3 style={{ color: "white", marginRight: "30px" }}>
-              {user.result.name}
-            </h3>
+            <h3 style={{ color: "white" }}>{user.result.username}</h3>
             <Button
               onClick={logout}
               variant="contained"
               color="secondary"
-              style={{ marginRight: "30px" }}
+              style={{ margin: "0 30px" }}
             >
               Logout
             </Button>
           </div>
         ) : (
           <div>
-            <Link to="/auth">Login</Link>
+            <Button
+              component={Link}
+              to="/auth"
+              variant="contained"
+              color="primary"
+              style={{ margin: "0 30px" }}
+            >
+              Login
+            </Button>
           </div>
         )}
       </div>

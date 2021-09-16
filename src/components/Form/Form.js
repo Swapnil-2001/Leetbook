@@ -74,11 +74,13 @@ const Form = () => {
     }
 
     if (idOfPost) {
-      dispatch(updatePost(idOfPost, { ...postData, name: user?.result?.name }));
+      dispatch(
+        updatePost(idOfPost, { ...postData, name: user?.result?.username })
+      );
       dispatch({ type: REMOVE_ID });
       history.push(`/posts/${idOfPost}`);
     } else {
-      dispatch(createPost({ ...postData, name: user?.result?.name }));
+      dispatch(createPost({ ...postData, name: user?.result?.username }));
       history.push("/");
     }
     clear();

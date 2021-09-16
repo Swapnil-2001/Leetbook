@@ -19,6 +19,7 @@ const Auth = () => {
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
+    username: "",
     email: "",
     password: "",
     confirmPassword: "",
@@ -64,6 +65,11 @@ const Auth = () => {
             <Input
               name="lastName"
               placeholder="Last Name"
+              handleChange={handleChange}
+            />
+            <Input
+              name="username"
+              placeholder="Username"
               handleChange={handleChange}
             />
           </>

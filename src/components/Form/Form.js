@@ -1,7 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { TextField, Chip, Button } from "@material-ui/core";
+import {
+  TextField,
+  Chip,
+  Button,
+  FormControl,
+  FormControlLabel,
+  Radio,
+  RadioGroup,
+} from "@material-ui/core";
 import SendIcon from "@material-ui/icons/Send";
 import ClearIcon from "@material-ui/icons/Clear";
 
@@ -32,6 +40,7 @@ const Form = () => {
   const [postData, setPostData] = useState({
     title: "",
     message: "",
+    difficulty: "",
     tags: [],
   });
 
@@ -46,7 +55,7 @@ const Form = () => {
   }, [post]);
 
   const clear = () => {
-    setPostData({ title: "", message: "", tags: [] });
+    setPostData({ title: "", message: "", difficulty: "", tags: [] });
     setSelected(new Array(menuItems.length).fill(false));
   };
 
@@ -118,6 +127,28 @@ const Form = () => {
             setPostData({ ...postData, message: e.target.value })
           }
         />
+        <FormControl component="fieldset">
+          <RadioGroup
+            aria-label="gender"
+            name="gender1"
+            value={postData.difficulty}
+            onChange={(event) =>
+              setPostData((prev) => ({
+                ...prev,
+                difficulty: event.target.value,
+              }))
+            }
+            row
+          >
+            <FormControlLabel value="easy" control={<Radio />} label="Easy" />
+            <FormControlLabel
+              value="medium"
+              control={<Radio />}
+              label="Medium"
+            />
+            <FormControlLabel value="hard" control={<Radio />} label="Hard" />
+          </RadioGroup>
+        </FormControl>
         {/* <div>
           <Button
             aria-controls="fade-menu"

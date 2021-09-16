@@ -22,6 +22,7 @@ const Post = ({ post }) => {
         <h3 className={classes.title}>
           {title.length < 75 ? title : title.substring(0, 75) + "..."}
         </h3>
+        {post.difficulty}
         <div>
           {tags.map((tag) => (
             <Chip

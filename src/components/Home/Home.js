@@ -82,6 +82,7 @@ const Home = () => {
         <div className={classes.searchTagsDiv}>
           {menuItems.map((item, index) => (
             <Chip
+              key={item}
               label={item}
               clickable
               onClick={() => {

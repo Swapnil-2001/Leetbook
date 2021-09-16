@@ -4,7 +4,7 @@ import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
 import ArrowDropUpIcon from "@material-ui/icons/ArrowDropUp";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import moment from "moment";
 import { useParams } from "react-router-dom";
 
@@ -94,7 +94,7 @@ const PostDetails = () => {
               <div className={classes.header__div}>
                 <h2>{post.title}</h2>
                 <p>
-                  Created by {post.name}{" "}
+                  Created by <Link to={`/users/${post.name}`}>{post.name}</Link>{" "}
                   {moment(post.createdAt).utc().fromNow()}
                 </p>
               </div>
@@ -147,6 +147,7 @@ const PostDetails = () => {
           <h3 style={{ color: "#4b6587" }}>You might also like:</h3>
           {recommendedPosts.slice(0, 6).map((p) => (
             <div
+              key={p._id}
               className={classes.recommended__post}
               onClick={() => history.push(`/posts/${p._id}`)}
             >

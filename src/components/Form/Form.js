@@ -127,7 +127,7 @@ const Form = () => {
             setPostData({ ...postData, message: e.target.value })
           }
         />
-        <FormControl component="fieldset">
+        <FormControl style={{ marginTop: "20px" }} component="fieldset">
           <RadioGroup
             aria-label="gender"
             name="gender1"
@@ -140,13 +140,24 @@ const Form = () => {
             }
             row
           >
-            <FormControlLabel value="easy" control={<Radio />} label="Easy" />
             <FormControlLabel
+              style={{ color: "#38A3A5" }}
+              value="easy"
+              control={<Radio />}
+              label="Easy"
+            />
+            <FormControlLabel
+              style={{ color: "#FFAA4C" }}
               value="medium"
               control={<Radio />}
               label="Medium"
             />
-            <FormControlLabel value="hard" control={<Radio />} label="Hard" />
+            <FormControlLabel
+              style={{ color: "#B61919" }}
+              value="hard"
+              control={<Radio />}
+              label="Hard"
+            />
           </RadioGroup>
         </FormControl>
         {/* <div>

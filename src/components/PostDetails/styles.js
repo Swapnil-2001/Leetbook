@@ -41,12 +41,10 @@ export default makeStyles((theme) => ({
     },
   },
   commentsOuterContainer: {
-    display: "flex",
-    justifyContent: "space-between",
+    backgroundColor: "#F4F9F9",
+    margin: "0 75px 30px 75px",
+    padding: "30px",
+    paddingBottom: "20px",
   },
-  commentsInnerContainer: {
-    height: "200px",
-    overflowY: "auto",
-    marginRight: "30px",
-  },
+  commentsInnerContainer: {},
 }));

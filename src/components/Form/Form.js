@@ -59,7 +59,7 @@ const Form = () => {
     setPostData({
       title: "",
       message: "",
-      difficulty: "",
+      difficulty: "easy",
       comments: [],
       tags: [],
     });

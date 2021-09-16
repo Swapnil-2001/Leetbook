@@ -40,6 +40,7 @@ const Form = () => {
   const [postData, setPostData] = useState({
     title: "",
     message: "",
+    comments: [],
     difficulty: "easy",
     tags: [],
   });
@@ -55,7 +56,13 @@ const Form = () => {
   }, [post]);
 
   const clear = () => {
-    setPostData({ title: "", message: "", difficulty: "", tags: [] });
+    setPostData({
+      title: "",
+      message: "",
+      difficulty: "",
+      comments: [],
+      tags: [],
+    });
     setSelected(new Array(menuItems.length).fill(false));
   };
 
@@ -127,6 +134,7 @@ const Form = () => {
           helperText={error.message !== "" && error.message}
           variant="outlined"
           label="Content"
+          rows={4}
           multiline
           value={postData.message}
           onChange={(e) =>

@@ -14,6 +14,7 @@ import {
   likePost,
   deletePost,
 } from "../../actions/posts";
+import CommentSection from "./CommentSection";
 import { SET_FETCHED_POST } from "../../constants/actionTypes";
 import { SET_ID } from "../../constants/actionTypes";
 import useStyles from "./styles";
@@ -161,6 +162,7 @@ const PostDetails = () => {
           ))}
         </div>
       )}
+      <CommentSection />
     </>
   );
 };

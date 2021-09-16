@@ -40,4 +40,13 @@ export default makeStyles((theme) => ({
       border: "1px solid #686D76",
     },
   },
+  commentsOuterContainer: {
+    display: "flex",
+    justifyContent: "space-between",
+  },
+  commentsInnerContainer: {
+    height: "200px",
+    overflowY: "auto",
+    marginRight: "30px",
+  },
 }));

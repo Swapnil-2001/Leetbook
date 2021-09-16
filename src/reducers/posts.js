@@ -9,6 +9,7 @@ import {
   UPDATE,
   DELETE,
   LIKE,
+  COMMENT,
 } from "../constants/actionTypes";
 
 const reducer = (
@@ -50,6 +51,14 @@ const reducer = (
         posts: state.posts.map((post) =>
           post._id === action.payload._id ? action.payload : post
         ),
+      };
+    case COMMENT:
+      return {
+        ...state,
+        posts: state.posts.map((p) =>
+          p._id === action.payload._id ? action.payload : p
+        ),
+        post: action.payload,
       };
     case DELETE:
       return {

@@ -110,9 +110,14 @@ const Form = () => {
           style={{ marginTop: "50px", width: "70%" }}
           helperText={error.title !== "" && error.title}
           variant="outlined"
-          label="Title"
+          label="Title (max. 150 characters)"
           value={postData.title}
-          onChange={(e) => setPostData({ ...postData, title: e.target.value })}
+          onChange={(e) =>
+            setPostData({
+              ...postData,
+              title: e.target.value.substring(0, 150),
+            })
+          }
         />
         <TextField
           name="message"

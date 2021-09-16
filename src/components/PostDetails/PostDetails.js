@@ -52,13 +52,15 @@ const PostDetails = () => {
                 cursor: "pointer",
                 marginRight: "30px",
               }}
-              disabled={!user?.result}
               onClick={() => {
-                dispatch(likePost(post._id));
-                dispatch({
-                  type: SET_FETCHED_POST,
-                  payload: user?.result?._id,
-                });
+                if (!user) history.push("/auth");
+                else {
+                  dispatch(likePost(post._id));
+                  dispatch({
+                    type: SET_FETCHED_POST,
+                    payload: user?.result?._id,
+                  });
+                }
               }}
             >
               <ArrowDropUpIcon

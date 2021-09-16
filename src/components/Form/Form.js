@@ -48,7 +48,6 @@ const Form = () => {
   const clear = () => {
     setPostData({ title: "", message: "", tags: [] });
     setSelected(new Array(menuItems.length).fill(false));
-    dispatch({ type: REMOVE_ID });
   };
 
   const handleAdd = (tag) =>

@@ -97,10 +97,24 @@ const Home = () => {
             />
           ))}
         </div>
-        <button onClick={searchPost}>Search Post</button>
-        <button type="button" onClick={clearSearches}>
-          Clear search
-        </button>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            paddingBottom: "30px",
+          }}
+        >
+          <Button
+            onClick={searchPost}
+            color="primary"
+            style={{ marginRight: "20px" }}
+          >
+            Search Post
+          </Button>
+          <Button onClick={clearSearches} color="secondary">
+            Clear search
+          </Button>
+        </div>
       </div>
       {user && (
         <div

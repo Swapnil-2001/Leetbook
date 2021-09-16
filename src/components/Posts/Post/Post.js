@@ -19,7 +19,9 @@ const Post = ({ post }) => {
   return (
     <div onClick={openPost} className={classes.wrapper__div}>
       <div className={classes.leftHalf}>
-        <h3 className={classes.title}>{title}</h3>
+        <h3 className={classes.title}>
+          {title.length < 75 ? title : title.substring(0, 75) + "..."}
+        </h3>
         <div>
           {tags.map((tag) => (
             <Chip

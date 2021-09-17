@@ -18,4 +18,10 @@ export default makeStyles((theme) => ({
   login__div: {
     marginLeft: "auto",
   },
+  menuItem: {
+    padding: "20px",
+  },
+  logout: {
+    color: "#B42B51",
+  },
 }));

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Avatar, Button } from "@material-ui/core";
+import { Avatar, Button, Menu, MenuItem } from "@material-ui/core";
 import { Link, useHistory, useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import decode from "jwt-decode";
@@ -14,10 +14,12 @@ const Navbar = () => {
   const location = useLocation();
   const classes = useStyles();
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
+  const [anchorEl, setAnchorEl] = React.useState(null);
 
   const logout = () => {
     dispatch({ type: LOGOUT });
     history.push("/auth");
+    setAnchorEl(null);
     setUser(null);
   };
 
@@ -30,6 +32,14 @@ const Navbar = () => {
     setUser(JSON.parse(localStorage.getItem("profile")));
   }, [location]);
 
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
   return (
     <div className={classes.navbar}>
       <span className={classes.navbar__logo}>
@@ -40,18 +50,38 @@ const Navbar = () => {
       <div className={classes.login__div}>
         {user ? (
           <div style={{ display: "flex", alignItems: "center" }}>
-            <Avatar style={{ backgroundColor: "#7C83FD", marginRight: "10px" }}>
-              {user.result.name.charAt(0)}
-            </Avatar>
-            <h3 style={{ color: "white" }}>{user.result.username}</h3>
             <Button
-              onClick={logout}
-              variant="contained"
-              color="secondary"
-              style={{ margin: "0 30px" }}
+              aria-controls="simple-menu"
+              aria-haspopup="true"
+              onClick={handleClick}
             >
-              Logout
+              <Avatar style={{ backgroundColor: "#7C83FD" }}>
+                {user.result.name.charAt(0)}
+              </Avatar>
             </Button>
+            <Menu
+              id="simple-menu"
+              anchorEl={anchorEl}
+              keepMounted
+              open={Boolean(anchorEl)}
+              onClose={handleClose}
+            >
+              <MenuItem className={classes.menuItem} onClick={handleClose}>
+                Profile
+              </MenuItem>
+              <MenuItem className={classes.menuItem} onClick={handleClose}>
+                My account
+              </MenuItem>
+              <MenuItem
+                className={`${classes.menuItem} ${classes.logout}`}
+                onClick={logout}
+              >
+                Logout
+              </MenuItem>
+            </Menu>
+            <h3 style={{ color: "white", margin: "0 35px 0 20px" }}>
+              {user.result.username}
+            </h3>
           </div>
         ) : (
           <div>

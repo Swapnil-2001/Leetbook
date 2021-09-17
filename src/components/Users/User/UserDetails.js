@@ -14,7 +14,14 @@ const UserDetails = () => {
     dispatch(getUser(username));
   }, [dispatch, username]);
 
-  if (isLoading) return <CircularProgress />;
+  if (isLoading)
+    return (
+      <div
+        style={{ display: "flex", justifyContent: "center", marginTop: "70px" }}
+      >
+        <CircularProgress />
+      </div>
+    );
 
   return (
     <>

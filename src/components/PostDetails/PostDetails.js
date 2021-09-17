@@ -38,7 +38,14 @@ const PostDetails = () => {
 
   const recommendedPosts = posts?.filter(({ _id }) => _id !== post?._id);
 
-  if (isLoading) return <CircularProgress />;
+  if (isLoading)
+    return (
+      <div
+        style={{ display: "flex", justifyContent: "center", marginTop: "70px" }}
+      >
+        <CircularProgress />
+      </div>
+    );
 
   return (
     <>

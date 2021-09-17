@@ -28,5 +28,6 @@ export const comment = (username, comment, postId) =>
   API.post(`/posts/${postId}/commentPost`, { username, comment });
 
 export const signup = (formData) => API.post("/users/signup", formData);
-export const signin = (formData) => API.post("/users/signin", formData);
+export const signin = (formData, isGoogleSignIn) =>
+  API.post("/users/signin", { formData, isGoogleSignIn });
 export const fetchUser = (username) => API.get(`/users/${username}`);

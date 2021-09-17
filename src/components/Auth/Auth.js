@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory, Link } from "react-router-dom";
-// import { GoogleLogin } from "react-google-login";
+import { GoogleLogin } from "react-google-login";
 
 import Input from "./input";
 import { signin, signup } from "../../actions/auth";
-// import Icon from "./icon";
-// import { AUTH } from "../../constants/actionTypes";
+import Icon from "./icon";
+import { AUTH } from "../../constants/actionTypes";
 
 const Auth = () => {
   const user = JSON.parse(localStorage.getItem("profile"));
@@ -34,23 +34,26 @@ const Auth = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     if (signedUp) {
-      dispatch(signin(formData, history));
+      dispatch(signin(formData, false, history));
     } else {
       dispatch(signup(formData, history));
     }
   };
   const handleShowPassword = () => setShowPassword((prevState) => !prevState);
-  // const googleSuccess = async (res) => {
-  //   const result = res?.profileObj;
-  //   const token = res?.tokenId;
-  //   try {
-  //     dispatch({ type: AUTH, data: { result, token } });
-  //     history.push("/");
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-  // const googleFailure = () => console.log("Google Sign In Was Unsuccessful!");
+  const googleSuccess = async (res) => {
+    const result = res?.profileObj;
+    const userData = await dispatch(
+      signin({ email: result.email, password: "" }, true, history)
+    );
+    if (userData.message === "Sign in.") {
+      dispatch({
+        type: AUTH,
+        data: { result: userData.result, token: userData.token },
+      });
+      history.push("/");
+    }
+  };
+  const googleFailure = () => console.log("Google Sign In Was Unsuccessful!");
   return (
     <div style={{ textAlign: "center" }}>
       <span>{signedUp ? "Login" : "Sign Up"}</span>
@@ -95,7 +98,7 @@ const Auth = () => {
             type="password"
           />
         )}
-        {/* <GoogleLogin
+        <GoogleLogin
           clientId="963139434793-of0u3dv1a61l8ho9r1k78uilgmv27j57.apps.googleusercontent.com"
           render={(renderProps) => (
             <button
@@ -109,7 +112,7 @@ const Auth = () => {
           onSuccess={googleSuccess}
           onFailure={googleFailure}
           cookiePolicy="single_host_origin"
-        /> */}
+        />
         <button type="submit">{signedUp ? "Sign In" : "Sign Up"}</button>
         {signedUp && (
           <p>

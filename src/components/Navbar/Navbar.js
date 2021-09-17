@@ -69,7 +69,12 @@ const Navbar = () => {
               open={Boolean(anchorEl)}
               onClose={handleClose}
             >
-              <MenuItem className={classes.menuItem} onClick={handleClose}>
+              <MenuItem
+                component={Link}
+                to={`/users/${user?.result?.username}`}
+                className={classes.menuItem}
+                onClick={handleClose}
+              >
                 <AccountCircleIcon
                   color="primary"
                   style={{ marginRight: "10px" }}

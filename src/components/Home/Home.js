@@ -66,7 +66,7 @@ const Home = () => {
 
   return (
     <div>
-      <div>
+      <>
         <div className={classes.titleSearch}>
           <SearchIcon color="primary" />
           <TextField
@@ -108,20 +108,21 @@ const Home = () => {
           <Button
             onClick={searchPost}
             color="primary"
+            variant="outlined"
             style={{ marginRight: "20px" }}
           >
             Search Post
           </Button>
-          <Button onClick={clearSearches} color="secondary">
-            Clear search
+          <Button onClick={clearSearches} color="secondary" variant="outlined">
+            Clear
           </Button>
         </div>
-      </div>
+      </>
       {user && (
         <div
           style={{
             display: "flex",
-            justifyContent: "center",
+            justifyContent: "flex-end",
           }}
         >
           <Button
@@ -131,7 +132,7 @@ const Home = () => {
             className={classes.new__post__button}
             endIcon={<AddIcon />}
           >
-            New Post
+            New
           </Button>
         </div>
       )}

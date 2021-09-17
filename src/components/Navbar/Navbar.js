@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Avatar, Button, Menu, MenuItem } from "@material-ui/core";
+import ExitToAppIcon from "@material-ui/icons/ExitToApp";
+import AccountCircleIcon from "@material-ui/icons/AccountCircle";
+import AccountBoxIcon from "@material-ui/icons/AccountBox";
 import { Link, useHistory, useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import decode from "jwt-decode";
@@ -67,16 +70,24 @@ const Navbar = () => {
               onClose={handleClose}
             >
               <MenuItem className={classes.menuItem} onClick={handleClose}>
+                <AccountCircleIcon
+                  color="primary"
+                  style={{ marginRight: "10px" }}
+                />{" "}
                 Profile
               </MenuItem>
               <MenuItem className={classes.menuItem} onClick={handleClose}>
+                <AccountBoxIcon
+                  color="primary"
+                  style={{ marginRight: "10px" }}
+                />{" "}
                 My account
               </MenuItem>
               <MenuItem
                 className={`${classes.menuItem} ${classes.logout}`}
                 onClick={logout}
               >
-                Logout
+                <ExitToAppIcon style={{ marginRight: "10px" }} /> Logout
               </MenuItem>
             </Menu>
             <h3 style={{ color: "white", margin: "0 35px 0 20px" }}>

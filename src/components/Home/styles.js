@@ -10,6 +10,7 @@ export default makeStyles((theme) => ({
     backgroundColor: "rgba(0, 0, 0, 0.65)",
     color: "white",
     fontSize: "0.8rem",
+    marginRight: "75px",
     "&:hover": {
       backgroundColor: "rgba(0, 0, 0, 0.57)",
     },

@@ -5,6 +5,7 @@ import { GoogleLogin } from "react-google-login";
 
 import Input from "./input";
 import { signin } from "../../actions/auth";
+import resume from "../../images/Resume.jpg";
 import Icon from "./icon";
 import useStyles from "./styles";
 import { AUTH } from "../../constants/actionTypes";
@@ -65,46 +66,55 @@ const Auth = () => {
   };
   const googleFailure = () => console.log("Google Sign In Was Unsuccessful!");
   return (
-    <div style={{ marginLeft: "100px" }}>
-      <h1 className={classes.heading}>Login</h1>
-      <form onSubmit={handleSubmit}>
-        <Input
-          error={error.email}
-          name="email"
-          placeholder="Email"
-          handleChange={handleChange}
-          type="email"
-        />
-        <Input
-          error={error.password}
-          name="password"
-          placeholder="Password"
-          handleChange={handleChange}
-          type={showPassword ? "text" : "password"}
-          showPassword={showPassword}
-          handleShowPassword={handleShowPassword}
-        />
-        <GoogleLogin
-          clientId="963139434793-of0u3dv1a61l8ho9r1k78uilgmv27j57.apps.googleusercontent.com"
-          render={(renderProps) => (
-            <button
-              onClick={renderProps.onClick}
-              disabled={renderProps.disabled}
-            >
-              <Icon />
-              Sign In With Google
-            </button>
-          )}
-          onSuccess={googleSuccess}
-          onFailure={googleFailure}
-          cookiePolicy="single_host_origin"
-        />
-        <button type="submit">Sign In</button>
-        <p>
-          Don't have an account? <Link to="/signup">Sign Up!</Link>
-        </p>
-      </form>
-      <Link to="/reset">Forgot Password?</Link>
+    <div style={{ display: "flex" }}>
+      <div style={{ flex: "1", marginLeft: "100px" }}>
+        <h1 className={classes.heading}>Login</h1>
+        <form onSubmit={handleSubmit}>
+          <Input
+            error={error.email}
+            name="email"
+            placeholder="Email"
+            handleChange={handleChange}
+            type="email"
+          />
+          <Input
+            error={error.password}
+            name="password"
+            placeholder="Password"
+            handleChange={handleChange}
+            type={showPassword ? "text" : "password"}
+            showPassword={showPassword}
+            handleShowPassword={handleShowPassword}
+          />
+          <GoogleLogin
+            clientId="963139434793-of0u3dv1a61l8ho9r1k78uilgmv27j57.apps.googleusercontent.com"
+            render={(renderProps) => (
+              <button
+                onClick={renderProps.onClick}
+                disabled={renderProps.disabled}
+              >
+                <Icon />
+                Sign In With Google
+              </button>
+            )}
+            onSuccess={googleSuccess}
+            onFailure={googleFailure}
+            cookiePolicy="single_host_origin"
+          />
+          <button type="submit">Sign In</button>
+          <p>
+            Don't have an account? <Link to="/signup">Sign Up!</Link>
+          </p>
+        </form>
+        <Link to="/reset">Forgot Password?</Link>
+      </div>
+      <div className={classes.right__div}>
+        <h1 className={classes.right__div__text}>
+          Grind Leetcode. Add questions you liked. Include insights into your
+          solutions. Ace those interviews.
+        </h1>
+        <img src={resume} alt="Resume with candidate" />
+      </div>
     </div>
   );
 };

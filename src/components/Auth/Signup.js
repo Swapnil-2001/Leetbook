@@ -4,6 +4,7 @@ import { useHistory, Link } from "react-router-dom";
 
 import Input from "./input";
 import { signup } from "../../actions/auth";
+import resume from "../../images/Resume.jpg";
 import useStyles from "./styles";
 
 const Signup = () => {
@@ -50,54 +51,63 @@ const Signup = () => {
   };
   const handleShowPassword = () => setShowPassword((prevState) => !prevState);
   return (
-    <div style={{ marginLeft: "100px" }}>
-      <h1 className={classes.heading}>Sign Up</h1>
-      <form onSubmit={handleSubmit}>
-        <Input
-          error={error.firstName}
-          name="firstName"
-          placeholder="First Name"
-          handleChange={handleChange}
-        />
-        <Input
-          error={error.lastName}
-          name="lastName"
-          placeholder="Last Name"
-          handleChange={handleChange}
-        />
-        <Input
-          error={error.username}
-          name="username"
-          placeholder="Username"
-          handleChange={handleChange}
-        />
-        <Input
-          error={error.email}
-          name="email"
-          placeholder="Email"
-          handleChange={handleChange}
-          type="email"
-        />
-        <Input
-          error={error.password}
-          name="password"
-          placeholder="Password"
-          handleChange={handleChange}
-          type={showPassword ? "text" : "password"}
-          showPassword={showPassword}
-          handleShowPassword={handleShowPassword}
-        />
-        <Input
-          name="confirmPassword"
-          placeholder="Confirm Password"
-          handleChange={handleChange}
-          type="password"
-        />
-        <button type="submit">Sign Up</button>
-        <p>
-          Have an account? <Link to="/auth">Login!</Link>
-        </p>
-      </form>
+    <div style={{ display: "flex" }}>
+      <div style={{ flex: "1", marginLeft: "75px" }}>
+        <h1 className={classes.heading}>Sign Up</h1>
+        <form onSubmit={handleSubmit}>
+          <Input
+            error={error.firstName}
+            name="firstName"
+            placeholder="First Name"
+            handleChange={handleChange}
+          />
+          <Input
+            error={error.lastName}
+            name="lastName"
+            placeholder="Last Name"
+            handleChange={handleChange}
+          />
+          <Input
+            error={error.username}
+            name="username"
+            placeholder="Username"
+            handleChange={handleChange}
+          />
+          <Input
+            error={error.email}
+            name="email"
+            placeholder="Email"
+            handleChange={handleChange}
+            type="email"
+          />
+          <Input
+            error={error.password}
+            name="password"
+            placeholder="Password"
+            handleChange={handleChange}
+            type={showPassword ? "text" : "password"}
+            showPassword={showPassword}
+            handleShowPassword={handleShowPassword}
+          />
+          <Input
+            name="confirmPassword"
+            placeholder="Confirm Password"
+            handleChange={handleChange}
+            type="password"
+          />
+          <button type="submit">Sign Up</button>
+          <p>
+            Have an account? <Link to="/auth">Login!</Link>
+          </p>
+        </form>
+      </div>
+      <div className={classes.right__div}>
+        <h1 className={classes.right__div__text}>
+          Grind Leetcode. Add questions you liked. Include insights into your
+          solutions. Ace those interviews.
+        </h1>
+        <img src={resume} alt="Resume with candidate" />
+      </div>
     </div>
   );
 };

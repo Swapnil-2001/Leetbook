@@ -20,7 +20,7 @@ const UserInput = ({
       <TextField
         error={error}
         helperText={error !== "" && error}
-        style={{ width: "25%" }}
+        style={{ width: "75%" }}
         name={name}
         label={placeholder}
         onChange={handleChange}

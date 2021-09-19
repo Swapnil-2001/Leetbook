@@ -1,5 +1,7 @@
 import React from "react";
 import { TextField } from "@material-ui/core";
+import VisibilityIcon from "@material-ui/icons/Visibility";
+import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
 
 import useStyles from "./styles";
 
@@ -8,12 +10,16 @@ const UserInput = ({
   handleChange,
   placeholder,
   type,
+  error,
+  showPassword,
   handleShowPassword,
 }) => {
   const classes = useStyles();
   return (
     <div className={classes.input__wrapper}>
       <TextField
+        error={error}
+        helperText={error !== "" && error}
         style={{ width: "25%" }}
         name={name}
         label={placeholder}
@@ -22,11 +28,20 @@ const UserInput = ({
         variant="outlined"
         autoComplete="off"
       />
-      {name === "password" && (
-        <button type="button" onClick={handleShowPassword}>
-          Toggle
-        </button>
-      )}
+      {name === "password" &&
+        (showPassword ? (
+          <VisibilityOffIcon
+            style={{ cursor: "pointer", marginLeft: "15px" }}
+            onClick={handleShowPassword}
+            fontSize="large"
+          />
+        ) : (
+          <VisibilityIcon
+            style={{ cursor: "pointer", marginLeft: "15px" }}
+            onClick={handleShowPassword}
+            fontSize="large"
+          />
+        ))}
     </div>
   );
 };

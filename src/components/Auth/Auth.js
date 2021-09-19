@@ -26,6 +26,13 @@ const Auth = () => {
     password: "",
     confirmPassword: "",
   });
+  const [error, setError] = useState({
+    firstName: "",
+    lastName: "",
+    username: "",
+    email: "",
+    password: "",
+  });
 
   const dispatch = useDispatch();
 
@@ -35,9 +42,44 @@ const Auth = () => {
   };
   const handleSubmit = (event) => {
     event.preventDefault();
+    let valid = true;
+    if (!formData.email.trim()) {
+      setError((prev) => ({ ...prev, email: "Email should not be empty" }));
+      valid = false;
+    }
+    if (!formData.password.trim()) {
+      setError((prev) => ({
+        ...prev,
+        password: "Password should not be empty",
+      }));
+      valid = false;
+    }
+    if (!valid) return;
     if (signedUp) {
       dispatch(signin(formData, false, history));
     } else {
+      if (!formData.firstName.trim()) {
+        setError((prev) => ({
+          ...prev,
+          firstName: "First name should not be empty",
+        }));
+        valid = false;
+      }
+      if (!formData.lastName.trim()) {
+        setError((prev) => ({
+          ...prev,
+          lastName: "Last name should not be empty",
+        }));
+        valid = false;
+      }
+      if (!formData.username.trim()) {
+        setError((prev) => ({
+          ...prev,
+          username: "Username should not be empty",
+        }));
+        valid = false;
+      }
+      if (!valid) return;
       dispatch(signup(formData, history));
     }
   };
@@ -57,22 +99,25 @@ const Auth = () => {
   };
   const googleFailure = () => console.log("Google Sign In Was Unsuccessful!");
   return (
-    <div style={{ textAlign: "center" }}>
+    <div style={{ marginLeft: "100px" }}>
       <h1 className={classes.heading}>{signedUp ? "Login" : "Sign Up"}</h1>
       <form onSubmit={handleSubmit}>
         {!signedUp && (
           <>
             <Input
+              error={error.firstName}
               name="firstName"
               placeholder="First Name"
               handleChange={handleChange}
             />
             <Input
+              error={error.lastName}
               name="lastName"
               placeholder="Last Name"
               handleChange={handleChange}
             />
             <Input
+              error={error.username}
               name="username"
               placeholder="Username"
               handleChange={handleChange}
@@ -80,16 +125,19 @@ const Auth = () => {
           </>
         )}
         <Input
+          error={error.email}
           name="email"
           placeholder="Email"
           handleChange={handleChange}
           type="email"
         />
         <Input
+          error={error.password}
           name="password"
           placeholder="Password"
           handleChange={handleChange}
           type={showPassword ? "text" : "password"}
+          showPassword={showPassword}
           handleShowPassword={handleShowPassword}
         />
         {!signedUp && (

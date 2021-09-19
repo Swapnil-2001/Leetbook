@@ -19,3 +19,4 @@ export const REMOVE_ID = "REMOVE_ID";
 
 export const AUTH = "AUTH";
 export const LOGOUT = "LOGOUT";
+export const SET_ERROR = "SET_ERROR";

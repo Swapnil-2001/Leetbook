@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory, Link } from "react-router-dom";
 import { GoogleLogin } from "react-google-login";
 import { Button } from "@material-ui/core";
@@ -27,6 +27,8 @@ const Auth = () => {
     email: "",
     password: "",
   });
+
+  const { error: serverError } = useSelector((state) => state.auth);
 
   const dispatch = useDispatch();
 
@@ -57,7 +59,7 @@ const Auth = () => {
     const userData = await dispatch(
       signin({ email: result.email, password: "" }, true, history)
     );
-    if (userData.message === "Sign in.") {
+    if (!userData?.message) {
       dispatch({
         type: AUTH,
         data: { result: userData.result, token: userData.token },
@@ -87,6 +89,11 @@ const Auth = () => {
             showPassword={showPassword}
             handleShowPassword={handleShowPassword}
           />
+          {serverError && (
+            <div style={{ color: "#E63E6D", marginTop: "5px" }}>
+              {serverError}
+            </div>
+          )}
           <div style={{ margin: "15px 0 30px 0" }}>
             <Link style={{ color: "#39A2DB" }} to="/reset">
               Forgot Password?

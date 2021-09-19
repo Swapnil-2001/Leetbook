@@ -6,11 +6,13 @@ import { GoogleLogin } from "react-google-login";
 import Input from "./input";
 import { signin, signup } from "../../actions/auth";
 import Icon from "./icon";
+import useStyles from "./styles";
 import { AUTH } from "../../constants/actionTypes";
 
 const Auth = () => {
   const user = JSON.parse(localStorage.getItem("profile"));
   const history = useHistory();
+  const classes = useStyles();
   useEffect(() => {
     if (user) history.push("/");
   }, [user, history]);
@@ -56,7 +58,7 @@ const Auth = () => {
   const googleFailure = () => console.log("Google Sign In Was Unsuccessful!");
   return (
     <div style={{ textAlign: "center" }}>
-      <span>{signedUp ? "Login" : "Sign Up"}</span>
+      <h1 className={classes.heading}>{signedUp ? "Login" : "Sign Up"}</h1>
       <form onSubmit={handleSubmit}>
         {!signedUp && (
           <>

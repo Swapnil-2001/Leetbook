@@ -1,5 +1,5 @@
 import React from "react";
-import { TextField } from "@material-ui/core";
+import { TextField, InputAdornment, IconButton } from "@material-ui/core";
 import VisibilityIcon from "@material-ui/icons/Visibility";
 import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
 
@@ -27,21 +27,24 @@ const UserInput = ({
         type={type}
         variant="outlined"
         autoComplete="off"
+        InputProps={
+          name === "password"
+            ? {
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton onClick={handleShowPassword}>
+                      {type === "password" ? (
+                        <VisibilityIcon />
+                      ) : (
+                        <VisibilityOffIcon />
+                      )}
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }
+            : null
+        }
       />
-      {name === "password" &&
-        (showPassword ? (
-          <VisibilityOffIcon
-            style={{ cursor: "pointer", marginLeft: "15px" }}
-            onClick={handleShowPassword}
-            fontSize="large"
-          />
-        ) : (
-          <VisibilityIcon
-            style={{ cursor: "pointer", marginLeft: "15px" }}
-            onClick={handleShowPassword}
-            fontSize="large"
-          />
-        ))}
     </div>
   );
 };

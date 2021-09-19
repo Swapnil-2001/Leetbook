@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory, Link } from "react-router-dom";
 import { GoogleLogin } from "react-google-login";
+import { Button } from "@material-ui/core";
 
 import Input from "./input";
 import { signin } from "../../actions/auth";
@@ -67,7 +68,7 @@ const Auth = () => {
   const googleFailure = () => console.log("Google Sign In Was Unsuccessful!");
   return (
     <div style={{ display: "flex" }}>
-      <div style={{ flex: "1", marginLeft: "100px" }}>
+      <div style={{ flex: "1", marginLeft: "100px", textAlign: "center" }}>
         <h1 className={classes.heading}>Login</h1>
         <form onSubmit={handleSubmit}>
           <Input
@@ -86,27 +87,46 @@ const Auth = () => {
             showPassword={showPassword}
             handleShowPassword={handleShowPassword}
           />
+          <div style={{ margin: "15px 0 30px 0" }}>
+            <Link style={{ color: "#39A2DB" }} to="/reset">
+              Forgot Password?
+            </Link>
+          </div>
+          <div>
+            <Button
+              style={{ marginBottom: "15px" }}
+              variant="outlined"
+              color="primary"
+              type="submit"
+            >
+              Sign In
+            </Button>
+          </div>
           <GoogleLogin
             clientId="963139434793-of0u3dv1a61l8ho9r1k78uilgmv27j57.apps.googleusercontent.com"
             render={(renderProps) => (
-              <button
+              <Button
                 onClick={renderProps.onClick}
                 disabled={renderProps.disabled}
+                variant="contained"
+                color="primary"
+                style={{ marginBottom: "15px" }}
               >
+                Sign In With &nbsp;
                 <Icon />
-                Sign In With Google
-              </button>
+              </Button>
             )}
             onSuccess={googleSuccess}
             onFailure={googleFailure}
             cookiePolicy="single_host_origin"
           />
-          <button type="submit">Sign In</button>
-          <p>
-            Don't have an account? <Link to="/signup">Sign Up!</Link>
+          <p style={{ marginBottom: "10px" }}>
+            Don't have an account?{" "}
+            <Link style={{ color: "#7C83FD" }} to="/signup">
+              Sign Up!
+            </Link>
           </p>
         </form>
-        <Link to="/reset">Forgot Password?</Link>
       </div>
       <div className={classes.right__div}>
         <h1 className={classes.right__div__text}>

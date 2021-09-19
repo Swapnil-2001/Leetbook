@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory, Link } from "react-router-dom";
+import { Button } from "@material-ui/core";
 
 import Input from "./input";
 import { signup } from "../../actions/auth";
@@ -51,7 +52,7 @@ const Signup = () => {
   };
   const handleShowPassword = () => setShowPassword((prevState) => !prevState);
   return (
-    <div style={{ display: "flex" }}>
+    <div style={{ display: "flex", textAlign: "center" }}>
       <div style={{ flex: "1", marginLeft: "75px" }}>
         <h1 className={classes.heading}>Sign Up</h1>
         <form onSubmit={handleSubmit}>
@@ -95,9 +96,19 @@ const Signup = () => {
             handleChange={handleChange}
             type="password"
           />
-          <button type="submit">Sign Up</button>
+          <Button
+            style={{ marginTop: "30px", marginBottom: "15px" }}
+            variant="outlined"
+            color="primary"
+            type="submit"
+          >
+            Sign Up
+          </Button>
           <p>
-            Have an account? <Link to="/auth">Login!</Link>
+            Have an account?{" "}
+            <Link style={{ color: "#7C83FD" }} to="/auth">
+              Login!
+            </Link>
           </p>
         </form>
       </div>

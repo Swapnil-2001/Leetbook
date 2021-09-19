@@ -8,12 +8,13 @@ export default makeStyles((theme) => ({
   },
   heading: {
     color: "#4b6587",
-    margin: "75px 0 30px 0",
+    marginTop: "75px",
   },
   input__wrapper: {
     display: "flex",
     alignItems: "center",
-    marginBottom: "30px",
+    justifyContent: "center",
+    marginTop: "30px",
   },
   right__div: {
     flex: "1.5",

@@ -9,6 +9,7 @@ import {
 import Home from "./components/Home/Home";
 import Form from "./components/Form/Form";
 import Auth from "./components/Auth/Auth";
+import Signup from "./components/Auth/Signup";
 import Navbar from "./components/Navbar/Navbar";
 import PostDetails from "./components/PostDetails/PostDetails";
 import UserDetails from "./components/Users/User/UserDetails";
@@ -23,6 +24,7 @@ const App = () => {
       <Switch>
         <Route exact path="/" component={() => <Redirect to="/posts" />} />
         <Route exact path="/auth" component={Auth} />
+        <Route exact path="/signup" component={Signup} />
         <Route exact path="/posts" component={Home} />
         <Route exact path="/posts/create" component={Form} />
         <Route exact path="/reset" component={PasswordReset} />

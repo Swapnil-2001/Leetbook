@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory, Link } from "react-router-dom";
-import { Button } from "@material-ui/core";
+import { Button, CircularProgress } from "@material-ui/core";
 
 import Input from "./input";
 import { signup } from "../../actions/auth";
@@ -34,6 +34,8 @@ const Signup = () => {
 
   const dispatch = useDispatch();
 
+  const { isLoading } = useSelector((state) => state.auth);
+
   const handleChange = (event) => {
     const { name, value } = event.target;
     setFormData({ ...formData, [name]: value });
@@ -51,6 +53,7 @@ const Signup = () => {
     dispatch(signup(formData, history));
   };
   const handleShowPassword = () => setShowPassword((prevState) => !prevState);
+
   return (
     <div style={{ display: "flex", textAlign: "center" }}>
       <div style={{ flex: "1", marginLeft: "75px" }}>
@@ -96,11 +99,23 @@ const Signup = () => {
             handleChange={handleChange}
             type="password"
           />
+          {isLoading && (
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                marginTop: "30px",
+              }}
+            >
+              <CircularProgress />
+            </div>
+          )}
           <Button
             style={{ marginTop: "30px", marginBottom: "15px" }}
             variant="outlined"
             color="primary"
             type="submit"
+            disabled={isLoading}
           >
             Sign Up
           </Button>

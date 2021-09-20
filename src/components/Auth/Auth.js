@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, Link } from "react-router-dom";
 import { GoogleLogin } from "react-google-login";
-import { Button } from "@material-ui/core";
+import { Button, CircularProgress } from "@material-ui/core";
 
 import Input from "./input";
 import { signin } from "../../actions/auth";
@@ -28,7 +28,7 @@ const Auth = () => {
     password: "",
   });
 
-  const { error: serverError } = useSelector((state) => state.auth);
+  const { error: serverError, isLoading } = useSelector((state) => state.auth);
 
   const dispatch = useDispatch();
 
@@ -59,7 +59,7 @@ const Auth = () => {
     const userData = await dispatch(
       signin({ email: result.email, password: "" }, true, history)
     );
-    if (!userData?.message) {
+    if (userData && !("message" in userData)) {
       dispatch({
         type: AUTH,
         data: { result: userData.result, token: userData.token },
@@ -68,6 +68,7 @@ const Auth = () => {
     }
   };
   const googleFailure = () => console.log("Google Sign In Was Unsuccessful!");
+
   return (
     <div style={{ display: "flex" }}>
       <div style={{ flex: "1", marginLeft: "100px", textAlign: "center" }}>
@@ -94,6 +95,17 @@ const Auth = () => {
               {serverError}
             </div>
           )}
+          {isLoading && (
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                marginTop: "30px",
+              }}
+            >
+              <CircularProgress />
+            </div>
+          )}
           <div style={{ margin: "15px 0 30px 0" }}>
             <Link style={{ color: "#39A2DB" }} to="/reset">
               Forgot Password?
@@ -105,6 +117,7 @@ const Auth = () => {
               variant="outlined"
               color="primary"
               type="submit"
+              disabled={isLoading}
             >
               Sign In
             </Button>

@@ -20,3 +20,5 @@ export const REMOVE_ID = "REMOVE_ID";
 export const AUTH = "AUTH";
 export const LOGOUT = "LOGOUT";
 export const SET_ERROR = "SET_ERROR";
+export const START_LOADING_AUTH = "START_LOADING_AUTH";
+export const STOP_LOADING_AUTH = "STOP_LOADING_AUTH";

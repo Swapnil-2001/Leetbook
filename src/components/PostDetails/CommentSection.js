@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import moment from "moment";
 import { TextField, Button } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
 import ChatIcon from "@material-ui/icons/Chat";
@@ -67,6 +68,11 @@ const CommentSection = () => {
         {post?.comments.map((c, index) => (
           <div style={{ display: "flex", flexDirection: "column" }} key={index}>
             <h4>{c.username}</h4>
+            <span
+              style={{ fontSize: "0.9rem", marginTop: "5px", color: "#6B7AA1" }}
+            >
+              {moment(c.createdAt).utc().fromNow()}
+            </span>
             <span style={{ margin: "5px 0 10px 10px", fontSize: "0.95rem" }}>
               {c.comment}
             </span>

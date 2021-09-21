@@ -1,13 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {
-  CircularProgress,
-  Fab,
-  Button,
-  Chip,
-  Modal,
-  Backdrop,
-  Fade,
-} from "@material-ui/core";
+import { CircularProgress, Fab, Chip } from "@material-ui/core";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
 import ArrowDropUpIcon from "@material-ui/icons/ArrowDropUp";
@@ -21,8 +13,8 @@ import {
   savePost,
   getPostsBySearch,
   likePost,
-  deletePost,
 } from "../../actions/posts";
+import DeleteModal from "./DeleteModal";
 import CommentSection from "./CommentSection";
 import { SET_FETCHED_POST } from "../../constants/actionTypes";
 import { SET_ID } from "../../constants/actionTypes";
@@ -62,51 +54,7 @@ const PostDetails = () => {
     <>
       {post && (
         <div style={{ display: "flex", padding: "50px 70px 50px 30px" }}>
-          <Modal
-            aria-labelledby="transition-modal-title"
-            aria-describedby="transition-modal-description"
-            className={classes.modal}
-            open={open}
-            onClose={() => setOpen(false)}
-            closeAfterTransition
-            BackdropComponent={Backdrop}
-            BackdropProps={{
-              timeout: 500,
-            }}
-          >
-            <Fade in={open}>
-              <div className={classes.paper}>
-                <h3>Are you sure you want to delete this post?</h3>
-                <div
-                  style={{
-                    display: "flex",
-                    justifyContent: "center",
-                    marginTop: "30px",
-                  }}
-                >
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    style={{ marginRight: "15px" }}
-                    onClick={() => setOpen(false)}
-                  >
-                    No
-                  </Button>
-                  <Button
-                    variant="contained"
-                    color="secondary"
-                    onClick={() => {
-                      dispatch(deletePost(post._id));
-                      setOpen(false);
-                      history.push("/posts");
-                    }}
-                  >
-                    Yes
-                  </Button>
-                </div>
-              </div>
-            </Fade>
-          </Modal>
+          <DeleteModal open={open} setOpen={setOpen} postId={post?._id} />
           <div>
             <span
               style={{

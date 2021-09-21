@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { CircularProgress, Fab, Chip } from "@material-ui/core";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
+import BookmarkBorderIcon from "@material-ui/icons/BookmarkBorder";
+import BookmarkIcon from "@material-ui/icons/Bookmark";
 import ArrowDropUpIcon from "@material-ui/icons/ArrowDropUp";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, Link } from "react-router-dom";
@@ -111,13 +113,30 @@ const PostDetails = () => {
                 </p>
               </div>
               {post.creator === user?.result?._id && (
-                <div style={{ marginLeft: "auto" }}>
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    marginLeft: "auto",
+                  }}
+                >
                   <span
+                    className={classes.icons}
                     onClick={() => {
                       dispatch(savePost(user?.result?._id, post._id));
                     }}
                   >
-                    Save
+                    {post?.usersWhoSaved?.includes(user?.result?._id) ? (
+                      <BookmarkIcon
+                        color="primary"
+                        style={{ cursor: "pointer", fontSize: 35 }}
+                      />
+                    ) : (
+                      <BookmarkBorderIcon
+                        color="primary"
+                        style={{ cursor: "pointer", fontSize: 35 }}
+                      />
+                    )}
                   </span>
                   <span
                     className={classes.icons}

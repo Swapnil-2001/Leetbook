@@ -3,6 +3,7 @@ import {
   FETCH_ALL,
   FETCH_POST,
   SET_FETCHED_POST,
+  SET_SAVED_POST,
   FETCH_BY_SEARCH,
   STOP_LOADING,
   CREATE,
@@ -29,6 +30,8 @@ const reducer = (
         numberOfPages: action.payload.numberOfPages,
       };
     case FETCH_POST:
+      return { ...state, post: action.payload };
+    case SET_SAVED_POST:
       return { ...state, post: action.payload };
     case SET_FETCHED_POST:
       return {

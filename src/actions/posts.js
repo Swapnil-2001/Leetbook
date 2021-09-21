@@ -4,6 +4,7 @@ import {
   FETCH_ALL,
   FETCH_POST,
   FETCH_BY_SEARCH,
+  SET_SAVED_POST,
   STOP_LOADING,
   CREATE,
   UPDATE,
@@ -65,7 +66,7 @@ export const updatePost = (id, updatedPost) => async (dispatch) => {
 export const savePost = (userId, postId) => async (dispatch) => {
   try {
     const { data } = await api.savePost(userId, postId);
-    console.log(data);
+    dispatch({ type: SET_SAVED_POST, payload: data });
   } catch (error) {
     console.log(error);
   }

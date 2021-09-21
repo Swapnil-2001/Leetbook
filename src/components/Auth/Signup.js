@@ -34,7 +34,7 @@ const Signup = () => {
 
   const dispatch = useDispatch();
 
-  const { isLoading } = useSelector((state) => state.auth);
+  const { error: serverError, isLoading } = useSelector((state) => state.auth);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -108,6 +108,11 @@ const Signup = () => {
               }}
             >
               <CircularProgress />
+            </div>
+          )}
+          {serverError && (
+            <div style={{ color: "#E63E6D", marginTop: "5px" }}>
+              {serverError}
             </div>
           )}
           <Button

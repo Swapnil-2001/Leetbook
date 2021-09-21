@@ -62,6 +62,15 @@ export const updatePost = (id, updatedPost) => async (dispatch) => {
   }
 };
 
+export const savePost = (userId, postId) => async (dispatch) => {
+  try {
+    const { data } = await api.savePost(userId, postId);
+    console.log(data);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export const deletePost = (id) => async (dispatch) => {
   try {
     await api.deletePost(id);

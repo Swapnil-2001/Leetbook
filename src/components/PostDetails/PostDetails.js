@@ -18,6 +18,7 @@ import { useParams } from "react-router-dom";
 
 import {
   getPost,
+  savePost,
   getPostsBySearch,
   likePost,
   deletePost,
@@ -84,7 +85,7 @@ const PostDetails = () => {
                   }}
                 >
                   <Button
-                    variant="outlined"
+                    variant="contained"
                     color="primary"
                     style={{ marginRight: "15px" }}
                     onClick={() => setOpen(false)}
@@ -92,7 +93,7 @@ const PostDetails = () => {
                     No
                   </Button>
                   <Button
-                    variant="outlined"
+                    variant="contained"
                     color="secondary"
                     onClick={() => {
                       dispatch(deletePost(post._id));
@@ -163,6 +164,13 @@ const PostDetails = () => {
               </div>
               {post.creator === user?.result?._id && (
                 <div style={{ marginLeft: "auto" }}>
+                  <span
+                    onClick={() => {
+                      dispatch(savePost(user?.result?._id, post._id));
+                    }}
+                  >
+                    Save
+                  </span>
                   <span
                     className={classes.icons}
                     onClick={() => {

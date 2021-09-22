@@ -5,6 +5,8 @@ import {
   STOP_LOADING_USER,
 } from "../constants/actionTypes";
 
+// getUser
+
 export const getUser = (username) => async (dispatch) => {
   try {
     dispatch({ type: START_LOADING_USER });

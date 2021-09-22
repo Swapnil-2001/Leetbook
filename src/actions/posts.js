@@ -55,10 +55,11 @@ export const createPost = (newPost, history) => async (dispatch) => {
 };
 
 // bug to be fixed
-export const updatePost = (id, updatedPost) => async (dispatch) => {
+export const updatePost = (id, updatedPost, history) => async (dispatch) => {
   try {
     const { data } = await api.updatePost(id, updatedPost);
     dispatch({ type: UPDATE, payload: data });
+    history.push(`/posts/${id}`);
   } catch (error) {
     console.log(error);
   }

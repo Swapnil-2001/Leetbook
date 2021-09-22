@@ -91,10 +91,13 @@ const Form = () => {
 
     if (idOfPost) {
       dispatch(
-        updatePost(idOfPost, { ...postData, name: user?.result?.username })
+        updatePost(
+          idOfPost,
+          { ...postData, name: user?.result?.username },
+          history
+        )
       );
       dispatch({ type: REMOVE_ID });
-      history.push(`/posts/${idOfPost}`);
     } else {
       dispatch(
         createPost({ ...postData, name: user?.result?.username }, history)

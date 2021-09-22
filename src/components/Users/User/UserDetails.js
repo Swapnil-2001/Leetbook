@@ -28,9 +28,6 @@ const UserDetails = () => {
       {user && (
         <div>
           {user.username} {user.email}
-          {user?.savedPosts?.map((postId) => (
-            <div key={postId}>{postId}</div>
-          ))}
         </div>
       )}
     </>

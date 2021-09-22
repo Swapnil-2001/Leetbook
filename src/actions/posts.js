@@ -54,6 +54,7 @@ export const createPost = (newPost, history) => async (dispatch) => {
   }
 };
 
+// bug to be fixed
 export const updatePost = (id, updatedPost) => async (dispatch) => {
   try {
     const { data } = await api.updatePost(id, updatedPost);

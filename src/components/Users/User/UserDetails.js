@@ -1,7 +1,8 @@
 import React, { useEffect } from "react";
-import { CircularProgress } from "@material-ui/core";
+import { CircularProgress, Button } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, Link } from "react-router-dom";
+import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 
 import { getUser } from "../../../actions/users";
 import useStyles from "./styles";
@@ -34,7 +35,16 @@ const UserDetails = () => {
           <h3 className={classes.username}>{user.username}</h3>
           <h3 className={classes.email}>{user.email}</h3>
           {currentUser?.result?._id === user._id && (
-            <Link to={`/posts/saved/${user._id}`}>Saved Posts</Link>
+            <Button
+              style={{ margin: "30px 0", textTransform: "none" }}
+              component={Link}
+              to={`/posts/saved/${user._id}`}
+              variant="outlined"
+              color="primary"
+              endIcon={<ChevronRightIcon />}
+            >
+              View Saved Posts
+            </Button>
           )}
         </div>
       )}

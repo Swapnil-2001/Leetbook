@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { CircularProgress } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 
 import { getUser } from "../../../actions/users";
 import useStyles from "./styles";
@@ -33,7 +33,9 @@ const UserDetails = () => {
           <h1 className={classes.name}>{user.name}</h1>
           <h3 className={classes.username}>{user.username}</h3>
           <h3 className={classes.email}>{user.email}</h3>
-          {currentUser?.result?._id === user._id && <div>Saved Posts</div>}
+          {currentUser?.result?._id === user._id && (
+            <Link to={`/posts/saved/${user._id}`}>Saved Posts</Link>
+          )}
         </div>
       )}
     </>

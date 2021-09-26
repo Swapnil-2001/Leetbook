@@ -30,7 +30,7 @@ const Form = () => {
   const history = useHistory();
   const classes = useStyles();
   const idOfPost = useSelector((state) => state.editId);
-  const { posts } = useSelector((state) => state.posts);
+  const { post } = useSelector((state) => state.posts);
   const user = JSON.parse(localStorage.getItem("profile"));
 
   useEffect(() => {
@@ -45,15 +45,14 @@ const Form = () => {
     tags: [],
   });
 
-  const post = idOfPost ? posts.find((p) => idOfPost === p._id) : null;
   useEffect(() => {
-    if (post) {
+    if (idOfPost && post) {
       setPostData(post);
       setSelected((prevState) =>
         prevState.map((_, index) => post.tags.includes(menuItems[index]))
       );
     }
-  }, [post]);
+  }, [idOfPost, post]);
 
   const clear = () => {
     setPostData({

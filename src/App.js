@@ -8,6 +8,7 @@ import {
 
 import Home from "./components/Home/Home";
 import Form from "./components/Form/Form";
+import Editor from "./components/Form/Editor";
 import Auth from "./components/Auth/Auth";
 import Signup from "./components/Auth/Signup";
 import Navbar from "./components/Navbar/Navbar";
@@ -24,6 +25,7 @@ const App = () => {
       <Navbar />
       <Switch>
         <Route exact path="/" component={() => <Redirect to="/posts" />} />
+        <Route exact path="/editor" component={Editor} />
         <Route exact path="/auth" component={Auth} />
         <Route exact path="/signup" component={Signup} />
         <Route exact path="/posts" component={Home} />

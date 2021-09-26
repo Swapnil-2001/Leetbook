@@ -18,7 +18,15 @@ const SavedPosts = () => {
         Your Saved Posts
       </h2>
       {user?.savedPosts.length === 0 && (
-        <h3 style={{ color: "#4b6587" }}>You have not saved any posts!</h3>
+        <>
+          <h3 style={{ color: "#4b6587", marginBottom: "10px" }}>
+            You have not saved any posts!
+          </h3>
+          <h4 style={{ color: "#6F69AC" }}>
+            It might be that you saved a post but it's not there anymore. That's
+            because the said post has been deleted by the creator.
+          </h4>
+        </>
       )}
       {user?.savedPosts.map((post) => (
         <Post key={post._id} post={post} />

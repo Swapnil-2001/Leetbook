@@ -13,6 +13,7 @@ import {
 import SendIcon from "@material-ui/icons/Send";
 import ClearIcon from "@material-ui/icons/Clear";
 
+import Editor from "./Editor";
 import { createPost, updatePost } from "../../actions/posts";
 import { menuItems } from "./menuItems";
 import { REMOVE_ID } from "../../constants/actionTypes";
@@ -176,42 +177,6 @@ const Form = () => {
             />
           </RadioGroup>
         </FormControl>
-        {/* <div>
-          <Button
-            aria-controls="fade-menu"
-            aria-haspopup="true"
-            onClick={handleClick}
-          >
-            Tags Available
-          </Button>
-          <Menu
-            id="fade-menu"
-            anchorEl={anchorEl}
-            keepMounted
-            open={open}
-            onClose={handleClose}
-            TransitionComponent={Fade}
-          >
-            {menuItems.map((item, index) => (
-              <MenuItem
-                onClick={() => {
-                  setAnchorEl(null);
-                  handleAdd(menuItems[index]);
-                }}
-              >
-                {item}
-              </MenuItem>
-            ))}
-          </Menu>
-          <ChipInput
-            style={{ margin: "10px" }}
-            value={postData.tags}
-            onAdd={handleAdd}
-            onDelete={handleDelete}
-            label="Add Tags"
-            variant="outlined"
-          />
-        </div> */}
         <div className={classes.tagsDiv}>
           {menuItems.map((item, index) => (
             <Chip

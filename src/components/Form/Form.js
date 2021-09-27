@@ -130,7 +130,8 @@ const Form = () => {
             })
           }
         />
-        <TextField
+        <Editor setPostData={setPostData} />
+        {/* <TextField
           name="message"
           error={error.message}
           style={{ marginTop: "25px", width: "70%" }}
@@ -143,7 +144,7 @@ const Form = () => {
           onChange={(e) =>
             setPostData({ ...postData, message: e.target.value })
           }
-        />
+        /> */}
         <FormControl style={{ marginTop: "20px" }} component="fieldset">
           <RadioGroup
             aria-label="gender"

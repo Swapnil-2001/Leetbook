@@ -1,15 +1,28 @@
 import React, { useState } from "react";
 import { EditorState } from "draft-js";
 import { Editor } from "react-draft-wysiwyg";
+import { convertToRaw } from "draft-js";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 
-const EditorContainer = () => {
+import useStyles from "./styles";
+
+const EditorContainer = ({ setPostData }) => {
+  const classes = useStyles();
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
   return (
     <Editor
+      wrapperClassName={classes.wrapper}
+      editorClassName={classes.editor}
+      toolbarClassName={classes.toolbar}
       editorState={editorState}
       onEditorStateChange={(currState) => {
         setEditorState(currState);
+        setPostData((prevState) => ({
+          ...prevState,
+          message: JSON.stringify(
+            convertToRaw(editorState.getCurrentContent())
+          ),
+        }));
       }}
       toolbar={{
         options: [
@@ -20,17 +33,11 @@ const EditorContainer = () => {
           "list",
           "textAlign",
           "colorPicker",
-          "link",
-          "embedded",
           "emoji",
-          "remove",
           "history",
         ],
         inline: {
           inDropdown: false,
-          className: undefined,
-          component: undefined,
-          dropdownClassName: undefined,
           options: [
             "bold",
             "italic",
@@ -43,26 +50,10 @@ const EditorContainer = () => {
         },
         blockType: {
           inDropdown: true,
-          options: [
-            "Normal",
-            "H1",
-            "H2",
-            "H3",
-            "H4",
-            "H5",
-            "H6",
-            "Blockquote",
-            "Code",
-          ],
-          className: undefined,
-          component: undefined,
-          dropdownClassName: undefined,
+          options: ["Normal", "H1", "H2", "H3", "H4", "H5", "H6", "Code"],
         },
         fontSize: {
           options: [8, 9, 10, 11, 12, 14, 16, 18, 24, 30, 36, 48, 60, 72, 96],
-          className: undefined,
-          component: undefined,
-          dropdownClassName: undefined,
         },
         fontFamily: {
           options: [
@@ -73,28 +64,15 @@ const EditorContainer = () => {
             "Times New Roman",
             "Verdana",
           ],
-          className: undefined,
-          component: undefined,
           dropdownClassName: undefined,
         },
         list: {
-          inDropdown: false,
-          className: undefined,
-          component: undefined,
-          dropdownClassName: undefined,
-          options: ["unordered", "ordered", "indent", "outdent"],
+          options: ["unordered", "ordered"],
         },
         textAlign: {
-          inDropdown: false,
-          className: undefined,
-          component: undefined,
-          dropdownClassName: undefined,
-          options: ["left", "center", "right", "justify"],
+          options: ["left", "center", "right"],
         },
         colorPicker: {
-          className: undefined,
-          component: undefined,
-          popupClassName: undefined,
           colors: [
             "rgb(97,189,109)",
             "rgb(26,188,156)",
@@ -125,21 +103,7 @@ const EditorContainer = () => {
             "rgb(209,213,216)",
           ],
         },
-        link: {
-          inDropdown: false,
-          className: undefined,
-          component: undefined,
-          popupClassName: undefined,
-          dropdownClassName: undefined,
-          showOpenOptionOnHover: true,
-          defaultTargetOption: "_self",
-          options: ["link", "unlink"],
-          linkCallback: undefined,
-        },
         emoji: {
-          className: undefined,
-          component: undefined,
-          popupClassName: undefined,
           emojis: [
             "😀",
             "😁",
@@ -272,16 +236,6 @@ const EditorContainer = () => {
             "❎",
             "💯",
           ],
-        },
-        embedded: {
-          className: undefined,
-          component: undefined,
-          popupClassName: undefined,
-          embedCallback: undefined,
-          defaultSize: {
-            height: "auto",
-            width: "auto",
-          },
         },
         history: {
           inDropdown: false,

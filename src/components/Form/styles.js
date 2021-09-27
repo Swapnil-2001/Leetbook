@@ -30,4 +30,14 @@ export default makeStyles((theme) => ({
     flexWrap: "wrap",
     margin: "0 150px",
   },
+  wrapper: {
+    marginTop: "40px",
+    border: "1px solid #3D56B2",
+  },
+  editor: {
+    padding: "20px 30px",
+  },
+  toolbar: {
+    border: "1px solid #3D56B2",
+  },
 }));

@@ -25,7 +25,6 @@ const Form = () => {
   );
   const [error, setError] = useState({
     title: "",
-    message: "",
   });
   const [dataToEditor, setDataToEditor] = useState(null);
   const dispatch = useDispatch();
@@ -77,17 +76,11 @@ const Form = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    if (!postData.title.trim() || !postData.message.trim()) {
-      if (!postData.title.trim())
-        setError((prevState) => ({
-          ...prevState,
-          title: "Title cannot be empty.",
-        }));
-      if (!postData.message.trim())
-        setError((prevState) => ({
-          ...prevState,
-          message: "Message cannot be empty.",
-        }));
+    if (!postData.title.trim()) {
+      setError((prevState) => ({
+        ...prevState,
+        title: "Title cannot be empty.",
+      }));
       return;
     }
 
@@ -133,14 +126,6 @@ const Form = () => {
           }
         />
         <Editor dataToEditor={dataToEditor} setPostData={setPostData} />
-        {/* <TextField
-          style={{ marginTop: "25px", width: "70%" }}
-          helperText={error.message !== "" && error.message}
-          value={postData.message}
-          onChange={(e) =>
-            setPostData({ ...postData, message: e.target.value })
-          }
-        /> */}
         <FormControl style={{ marginTop: "20px" }} component="fieldset">
           <RadioGroup
             aria-label="gender"

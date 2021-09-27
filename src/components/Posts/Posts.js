@@ -16,11 +16,15 @@ const Posts = () => {
     </div>
   ) : (
     <div className={classes.mainContainer}>
-      {posts.map((post) => (
-        <div key={post._id}>
-          <Post post={post} />
-        </div>
-      ))}
+      {posts.length === 0 ? (
+        <h3 style={{ color: "#4b6587" }}>No posts match your search.</h3>
+      ) : (
+        posts.map((post) => (
+          <div key={post._id}>
+            <Post post={post} />
+          </div>
+        ))
+      )}
     </div>
   );
 };

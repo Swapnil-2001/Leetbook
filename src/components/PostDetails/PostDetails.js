@@ -5,6 +5,8 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import BookmarkBorderIcon from "@material-ui/icons/BookmarkBorder";
 import BookmarkIcon from "@material-ui/icons/Bookmark";
 import ArrowDropUpIcon from "@material-ui/icons/ArrowDropUp";
+import draftToHtml from "draftjs-to-html";
+import DOMPurify from "dompurify";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, Link } from "react-router-dom";
 import moment from "moment";
@@ -25,6 +27,10 @@ import useStyles from "./styles";
 const PostDetails = () => {
   const user = JSON.parse(localStorage.getItem("profile"));
   const { post, posts, isLoading } = useSelector((state) => state.posts);
+  let markup;
+  if (post?.message) {
+    markup = draftToHtml(JSON.parse(post.message));
+  }
   const dispatch = useDispatch();
   const history = useHistory();
   const classes = useStyles();
@@ -158,7 +164,12 @@ const PostDetails = () => {
               )}
             </div>
             <hr />
-            <div className={classes.content}>{post.message}</div>
+            {markup && (
+              <div
+                className={classes.content}
+                dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(markup) }}
+              />
+            )}
             <div className={classes.content}>
               {post.tags.map((tag) => (
                 <Chip

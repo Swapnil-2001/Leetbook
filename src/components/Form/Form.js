@@ -13,6 +13,7 @@ import {
 import SendIcon from "@material-ui/icons/Send";
 import ClearIcon from "@material-ui/icons/Clear";
 
+import Editor from "./Editor";
 import { createPost, updatePost } from "../../actions/posts";
 import { menuItems } from "./menuItems";
 import { REMOVE_ID } from "../../constants/actionTypes";
@@ -24,13 +25,13 @@ const Form = () => {
   );
   const [error, setError] = useState({
     title: "",
-    message: "",
   });
+  const [dataToEditor, setDataToEditor] = useState(null);
   const dispatch = useDispatch();
   const history = useHistory();
   const classes = useStyles();
   const idOfPost = useSelector((state) => state.editId);
-  const { posts } = useSelector((state) => state.posts);
+  const { post } = useSelector((state) => state.posts);
   const user = JSON.parse(localStorage.getItem("profile"));
 
   useEffect(() => {
@@ -45,15 +46,15 @@ const Form = () => {
     tags: [],
   });
 
-  const post = idOfPost ? posts.find((p) => idOfPost === p._id) : null;
   useEffect(() => {
-    if (post) {
+    if (idOfPost && post) {
       setPostData(post);
+      setDataToEditor(post.message);
       setSelected((prevState) =>
         prevState.map((_, index) => post.tags.includes(menuItems[index]))
       );
     }
-  }, [post]);
+  }, [idOfPost, post]);
 
   const clear = () => {
     setPostData({
@@ -75,17 +76,11 @@ const Form = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    if (!postData.title.trim() || !postData.message.trim()) {
-      if (!postData.title.trim())
-        setError((prevState) => ({
-          ...prevState,
-          title: "Title cannot be empty.",
-        }));
-      if (!postData.message.trim())
-        setError((prevState) => ({
-          ...prevState,
-          message: "Message cannot be empty.",
-        }));
+    if (!postData.title.trim()) {
+      setError((prevState) => ({
+        ...prevState,
+        title: "Title cannot be empty.",
+      }));
       return;
     }
 
@@ -117,7 +112,7 @@ const Form = () => {
         <h2>{idOfPost ? "Edit" : "Create"} a Post</h2>
         <TextField
           name="title"
-          error={error.title}
+          error={error.title ? true : false}
           style={{ marginTop: "50px", width: "70%" }}
           helperText={error.title !== "" && error.title}
           variant="outlined"
@@ -130,20 +125,7 @@ const Form = () => {
             })
           }
         />
-        <TextField
-          name="message"
-          error={error.message}
-          style={{ marginTop: "25px", width: "70%" }}
-          helperText={error.message !== "" && error.message}
-          variant="outlined"
-          label="Content"
-          rows={4}
-          multiline
-          value={postData.message}
-          onChange={(e) =>
-            setPostData({ ...postData, message: e.target.value })
-          }
-        />
+        <Editor dataToEditor={dataToEditor} setPostData={setPostData} />
         <FormControl style={{ marginTop: "20px" }} component="fieldset">
           <RadioGroup
             aria-label="gender"
@@ -177,45 +159,10 @@ const Form = () => {
             />
           </RadioGroup>
         </FormControl>
-        {/* <div>
-          <Button
-            aria-controls="fade-menu"
-            aria-haspopup="true"
-            onClick={handleClick}
-          >
-            Tags Available
-          </Button>
-          <Menu
-            id="fade-menu"
-            anchorEl={anchorEl}
-            keepMounted
-            open={open}
-            onClose={handleClose}
-            TransitionComponent={Fade}
-          >
-            {menuItems.map((item, index) => (
-              <MenuItem
-                onClick={() => {
-                  setAnchorEl(null);
-                  handleAdd(menuItems[index]);
-                }}
-              >
-                {item}
-              </MenuItem>
-            ))}
-          </Menu>
-          <ChipInput
-            style={{ margin: "10px" }}
-            value={postData.tags}
-            onAdd={handleAdd}
-            onDelete={handleDelete}
-            label="Add Tags"
-            variant="outlined"
-          />
-        </div> */}
         <div className={classes.tagsDiv}>
           {menuItems.map((item, index) => (
             <Chip
+              key={item}
               label={item}
               clickable
               onClick={() => {

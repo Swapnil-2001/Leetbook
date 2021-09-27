@@ -109,11 +109,16 @@ const Home = () => {
             onClick={searchPost}
             color="primary"
             variant="outlined"
-            style={{ marginRight: "20px" }}
+            style={{ marginRight: "20px", textTransform: "none" }}
           >
             Search Post
           </Button>
-          <Button onClick={clearSearches} color="secondary" variant="outlined">
+          <Button
+            onClick={clearSearches}
+            color="secondary"
+            variant="outlined"
+            style={{ textTransform: "none" }}
+          >
             Clear
           </Button>
         </div>

@@ -1,14 +1,20 @@
-import React, { useState } from "react";
-import { EditorState } from "draft-js";
+import React, { useState, useEffect } from "react";
+import { EditorState, convertToRaw, convertFromRaw } from "draft-js";
 import { Editor } from "react-draft-wysiwyg";
-import { convertToRaw } from "draft-js";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 
 import useStyles from "./styles";
 
-const EditorContainer = ({ setPostData }) => {
+const EditorContainer = ({ dataToEditor, setPostData }) => {
   const classes = useStyles();
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
+  useEffect(() => {
+    if (dataToEditor) {
+      setEditorState(
+        EditorState.createWithContent(convertFromRaw(JSON.parse(dataToEditor)))
+      );
+    }
+  }, [dataToEditor]);
   return (
     <Editor
       wrapperClassName={classes.wrapper}

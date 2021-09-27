@@ -27,6 +27,7 @@ const Form = () => {
     title: "",
     message: "",
   });
+  const [dataToEditor, setDataToEditor] = useState(null);
   const dispatch = useDispatch();
   const history = useHistory();
   const classes = useStyles();
@@ -49,6 +50,7 @@ const Form = () => {
   useEffect(() => {
     if (idOfPost && post) {
       setPostData(post);
+      setDataToEditor(post.message);
       setSelected((prevState) =>
         prevState.map((_, index) => post.tags.includes(menuItems[index]))
       );
@@ -117,7 +119,7 @@ const Form = () => {
         <h2>{idOfPost ? "Edit" : "Create"} a Post</h2>
         <TextField
           name="title"
-          error={error.title}
+          error={error.title ? true : false}
           style={{ marginTop: "50px", width: "70%" }}
           helperText={error.title !== "" && error.title}
           variant="outlined"
@@ -130,16 +132,10 @@ const Form = () => {
             })
           }
         />
-        <Editor setPostData={setPostData} />
+        <Editor dataToEditor={dataToEditor} setPostData={setPostData} />
         {/* <TextField
-          name="message"
-          error={error.message}
           style={{ marginTop: "25px", width: "70%" }}
           helperText={error.message !== "" && error.message}
-          variant="outlined"
-          label="Content"
-          rows={4}
-          multiline
           value={postData.message}
           onChange={(e) =>
             setPostData({ ...postData, message: e.target.value })
@@ -181,6 +177,7 @@ const Form = () => {
         <div className={classes.tagsDiv}>
           {menuItems.map((item, index) => (
             <Chip
+              key={item}
               label={item}
               clickable
               onClick={() => {

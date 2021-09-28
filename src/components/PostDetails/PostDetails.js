@@ -10,6 +10,7 @@ import DOMPurify from "dompurify";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, Link } from "react-router-dom";
 import moment from "moment";
+import { WhatsappShareButton, WhatsappIcon } from "react-share";
 import { useParams } from "react-router-dom";
 
 import {
@@ -146,6 +147,17 @@ const PostDetails = () => {
                 >
                   <span
                     style={{ marginLeft: "30px" }}
+                    className={classes.icons}
+                  >
+                    <WhatsappShareButton
+                      title={`Check out this cool post created by ${post.name}!`}
+                      separator="   "
+                      url={window.location.href}
+                    >
+                      <WhatsappIcon size={32} round={true}></WhatsappIcon>
+                    </WhatsappShareButton>
+                  </span>
+                  <span
                     className={classes.icons}
                     onClick={() => {
                       dispatch(savePost(user?.result?._id, post._id));

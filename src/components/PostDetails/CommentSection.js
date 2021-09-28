@@ -32,7 +32,7 @@ const CommentSection = () => {
           <ChatIcon style={{ marginRight: "10px" }} />
           <h3>Comments:</h3>
         </div>
-        {user?.result && (
+        {user?.result ? (
           <div
             style={{
               margin: "0 30px",
@@ -63,6 +63,10 @@ const CommentSection = () => {
             >
               Comment
             </Button>
+          </div>
+        ) : (
+          <div style={{ textAlign: "center" }}>
+            <h4>Please log in to comment.</h4>
           </div>
         )}
         {post?.comments.map((c, index) => (

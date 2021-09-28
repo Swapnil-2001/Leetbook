@@ -30,6 +30,7 @@ const Signup = () => {
     username: "",
     email: "",
     password: "",
+    profileImg: "",
   });
 
   const dispatch = useDispatch();
@@ -44,13 +45,21 @@ const Signup = () => {
     event.preventDefault();
     let valid = true;
     Object.keys(formData).forEach((key) => {
-      if (!formData[key].trim()) {
+      if (key !== "profileImg" && !formData[key].trim()) {
         setError((prev) => ({ ...prev, [key]: "Should not be empty." }));
         valid = false;
       }
     });
     if (!valid) return;
-    dispatch(signup(formData, history));
+    const userData = new FormData();
+    userData.append("profileImg", formData.profileImg);
+    userData.append("firstName", formData.firstName);
+    userData.append("lastName", formData.lastName);
+    userData.append("username", formData.username);
+    userData.append("email", formData.email);
+    userData.append("password", formData.password);
+    userData.append("confirmPassword", formData.confirmPassword);
+    dispatch(signup(userData, history));
   };
   const handleShowPassword = () => setShowPassword((prevState) => !prevState);
 
@@ -59,6 +68,14 @@ const Signup = () => {
       <div style={{ flex: "1", marginLeft: "75px" }}>
         <h1 className={classes.heading}>Sign Up</h1>
         <form onSubmit={handleSubmit}>
+          <div className="form-group">
+            <input
+              type="file"
+              onChange={(e) =>
+                setFormData({ ...formData, profileImg: e.target.files[0] })
+              }
+            />
+          </div>
           <Input
             error={error.firstName ? true : false}
             name="firstName"

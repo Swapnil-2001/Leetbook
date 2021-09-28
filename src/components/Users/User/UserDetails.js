@@ -12,6 +12,7 @@ const UserDetails = () => {
   const classes = useStyles();
   const { username } = useParams();
   const { user, isLoading } = useSelector((state) => state.users);
+  console.log(user);
   const currentUser = JSON.parse(localStorage.getItem("profile"));
 
   useEffect(() => {
@@ -34,6 +35,8 @@ const UserDetails = () => {
           <h1 className={classes.name}>{user.name}</h1>
           <h3 className={classes.username}>{user.username}</h3>
           <h3 className={classes.email}>{user.email}</h3>
+          <h3>{user.reputation}</h3>
+          <img src={user.profileImg} alt="User" />
           {currentUser?.result?._id === user._id && (
             <Button
               style={{ margin: "30px 0", textTransform: "none" }}

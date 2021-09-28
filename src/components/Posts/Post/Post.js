@@ -8,7 +8,7 @@ import useStyles from "./styles";
 
 const Post = ({ post }) => {
   const user = JSON.parse(localStorage.getItem("profile"));
-  const { title, name, likes, createdAt, tags } = post;
+  const { title, name, likes, createdAt, difficulty, tags } = post;
   const history = useHistory();
   const classes = useStyles();
 
@@ -19,9 +19,25 @@ const Post = ({ post }) => {
   return (
     <div onClick={openPost} className={classes.wrapper__div}>
       <div className={classes.leftHalf}>
-        <h3 className={classes.title}>
-          {title.length < 75 ? title : title.substring(0, 75) + "..."}
-        </h3>
+        <div className={classes.title}>
+          <h3>{title.length < 75 ? title : title.substring(0, 75) + "..."}</h3>
+          <span
+            style={{
+              marginLeft: "25px",
+              borderRadius: "10px",
+              padding: "3px 10px",
+              backgroundColor:
+                difficulty === "easy"
+                  ? "#38A3A5"
+                  : difficulty === "medium"
+                  ? "orange"
+                  : "#911F27",
+              color: "white",
+            }}
+          >
+            {difficulty}
+          </span>
+        </div>
         <div>
           {tags.map((tag) => (
             <Chip

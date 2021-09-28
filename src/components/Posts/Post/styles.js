@@ -30,6 +30,8 @@ export default makeStyles((theme) => ({
     justifyContent: "center",
   },
   title: {
+    display: "flex",
+    alignItems: "center",
     marginBottom: "15px",
   },
   footer: {

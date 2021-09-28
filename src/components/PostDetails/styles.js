@@ -18,7 +18,13 @@ export default makeStyles((theme) => ({
     marginRight: "20px",
   },
   content: {
-    padding: "25px",
+    padding: "25px 50px",
+    whiteSpace: "pre-wrap",
+  },
+  title: {
+    display: "flex",
+    alignItems: "center",
+    marginBottom: "15px",
   },
   recommended__div: {
     textAlign: "center",

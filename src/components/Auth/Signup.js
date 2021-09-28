@@ -60,32 +60,32 @@ const Signup = () => {
         <h1 className={classes.heading}>Sign Up</h1>
         <form onSubmit={handleSubmit}>
           <Input
-            error={error.firstName}
+            error={error.firstName ? true : false}
             name="firstName"
             placeholder="First Name"
             handleChange={handleChange}
           />
           <Input
-            error={error.lastName}
+            error={error.lastName ? true : false}
             name="lastName"
             placeholder="Last Name"
             handleChange={handleChange}
           />
           <Input
-            error={error.username}
+            error={error.username ? true : false}
             name="username"
             placeholder="Username"
             handleChange={handleChange}
           />
           <Input
-            error={error.email}
+            error={error.email ? true : false}
             name="email"
             placeholder="Email"
             handleChange={handleChange}
             type="email"
           />
           <Input
-            error={error.password}
+            error={error.password ? true : false}
             name="password"
             placeholder="Password"
             handleChange={handleChange}

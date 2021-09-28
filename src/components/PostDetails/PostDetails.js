@@ -112,7 +112,25 @@ const PostDetails = () => {
               }}
             >
               <div className={classes.header__div}>
-                <h2>{post.title}</h2>
+                <div className={classes.title}>
+                  <h2>{post.title}</h2>
+                  <span
+                    style={{
+                      marginLeft: "25px",
+                      borderRadius: "10px",
+                      padding: "3px 10px",
+                      backgroundColor:
+                        post.difficulty === "easy"
+                          ? "#38A3A5"
+                          : post.difficulty === "medium"
+                          ? "orange"
+                          : "#911F27",
+                      color: "white",
+                    }}
+                  >
+                    {post.difficulty}
+                  </span>
+                </div>
                 <p>
                   Created by <Link to={`/users/${post.name}`}>{post.name}</Link>{" "}
                   {moment(post.createdAt).utc().fromNow()}
@@ -127,6 +145,7 @@ const PostDetails = () => {
                   }}
                 >
                   <span
+                    style={{ marginLeft: "30px" }}
                     className={classes.icons}
                     onClick={() => {
                       dispatch(savePost(user?.result?._id, post._id));
@@ -170,7 +189,7 @@ const PostDetails = () => {
                 dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(markup) }}
               />
             )}
-            <div className={classes.content}>
+            <div style={{ padding: "25px 50px", paddingTop: "0" }}>
               {post.tags.map((tag) => (
                 <Chip
                   key={tag}

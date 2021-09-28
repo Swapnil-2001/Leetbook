@@ -18,7 +18,7 @@ const UserInput = ({
   return (
     <div className={classes.input__wrapper}>
       <TextField
-        error={error}
+        error={error ? true : false}
         helperText={error !== "" && error}
         style={{ width: "75%" }}
         name={name}

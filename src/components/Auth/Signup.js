@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, Link } from "react-router-dom";
 import { Button, CircularProgress } from "@material-ui/core";
+import CloudUploadIcon from "@material-ui/icons/CloudUpload";
+import CheckCircleIcon from "@material-ui/icons/CheckCircle";
 
 import Input from "./input";
 import { signup } from "../../actions/auth";
@@ -68,13 +70,23 @@ const Signup = () => {
       <div style={{ flex: "1", marginLeft: "75px" }}>
         <h1 className={classes.heading}>Sign Up</h1>
         <form onSubmit={handleSubmit}>
-          <div className="form-group">
-            <input
-              type="file"
-              onChange={(e) =>
-                setFormData({ ...formData, profileImg: e.target.files[0] })
-              }
-            />
+          <div className={classes.file__div}>
+            <label className={classes.custom__file__upload}>
+              <input
+                type="file"
+                accept="image/png, image/jpg, image/jpeg"
+                onChange={(e) =>
+                  setFormData({ ...formData, profileImg: e.target.files[0] })
+                }
+              />
+              <CloudUploadIcon
+                style={{ marginRight: "10px", color: "#84A9AC" }}
+              />{" "}
+              Profile Picture
+            </label>
+            {formData.profileImg && (
+              <CheckCircleIcon style={{ color: "green", marginLeft: "15px" }} />
+            )}
           </div>
           <Input
             error={error.firstName ? true : false}

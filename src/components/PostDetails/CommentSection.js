@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import moment from "moment";
+import { Link } from "react-router-dom";
 import { TextField, Button } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
 import ChatIcon from "@material-ui/icons/Chat";
@@ -71,7 +72,12 @@ const CommentSection = () => {
         )}
         {post?.comments.map((c, index) => (
           <div style={{ display: "flex", flexDirection: "column" }} key={index}>
-            <h4>{c.username}</h4>
+            <Link
+              style={{ color: "#4b6587", fontWeight: "600" }}
+              to={`/users/${c.username}`}
+            >
+              {c.username}
+            </Link>
             <span
               style={{ fontSize: "0.9rem", marginTop: "5px", color: "#6B7AA1" }}
             >

@@ -96,7 +96,9 @@ const UserDetails = () => {
               ))}
             </div>
           ) : (
-            <div>No posts by this user.</div>
+            <h3 style={{ margin: "40px 0", color: "#4b6587" }}>
+              No posts by this user.
+            </h3>
           )}
         </div>
       )}

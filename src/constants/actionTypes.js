@@ -12,8 +12,11 @@ export const COMMENT = "COMMENT";
 export const DELETE = "DELETE";
 
 export const FETCH_USER = "FETCH_USER";
+export const ADD_POSTS = "ADD_POSTS";
 export const START_LOADING_USER = "START_LOADING_USER";
 export const STOP_LOADING_USER = "STOP_LOADING_USER";
+export const START_LOADING_USER_POSTS = "START_LOADING_USER_POSTS";
+export const STOP_LOADING_USER_POSTS = "STOP_LOADING_USER_POSTS";
 
 export const SET_ID = "SET_ID";
 export const REMOVE_ID = "REMOVE_ID";

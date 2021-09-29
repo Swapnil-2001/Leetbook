@@ -5,15 +5,18 @@ import { useParams, Link } from "react-router-dom";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import StarIcon from "@material-ui/icons/Star";
 
+import Post from "../../Posts/Post/Post";
 import { getUser } from "../../../actions/users";
+import { getPostsByUser } from "../../../actions/posts";
 import useStyles from "./styles";
 
 const UserDetails = () => {
   const dispatch = useDispatch();
   const classes = useStyles();
   const { username } = useParams();
-  const { user, isLoading } = useSelector((state) => state.users);
-  console.log(user);
+  const { user, userPosts, isLoading, isUserPostsLoading } = useSelector(
+    (state) => state.users
+  );
   const currentUser = JSON.parse(localStorage.getItem("profile"));
 
   useEffect(() => {
@@ -56,7 +59,7 @@ const UserDetails = () => {
           </div>
           {currentUser?.result?._id === user._id && (
             <Button
-              style={{ margin: "30px 0", textTransform: "none" }}
+              style={{ marginTop: "30px", textTransform: "none" }}
               component={Link}
               to={`/posts/saved/${user._id}`}
               variant="outlined"
@@ -65,6 +68,35 @@ const UserDetails = () => {
             >
               View Saved Posts
             </Button>
+          )}
+          {isUserPostsLoading && (
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                marginTop: "70px",
+              }}
+            >
+              <CircularProgress />
+            </div>
+          )}
+          {userPosts === null ? (
+            <Button
+              style={{ marginTop: "30px", textTransform: "none" }}
+              onClick={() => dispatch(getPostsByUser(username))}
+              variant="outlined"
+              color="primary"
+            >
+              Load Posts by {username}
+            </Button>
+          ) : userPosts.length > 0 ? (
+            <div style={{ margin: "40px 0", width: "70%" }}>
+              {userPosts.map((post) => (
+                <Post key={post._id} post={post} />
+              ))}
+            </div>
+          ) : (
+            <div>No posts by this user.</div>
           )}
         </div>
       )}

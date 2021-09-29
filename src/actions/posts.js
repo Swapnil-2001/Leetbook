@@ -1,11 +1,14 @@
 import * as api from "../api";
 import {
   START_LOADING,
+  STOP_LOADING,
+  START_LOADING_USER_POSTS,
+  STOP_LOADING_USER_POSTS,
   FETCH_ALL,
+  ADD_POSTS,
   FETCH_POST,
   FETCH_BY_SEARCH,
   SET_SAVED_POST,
-  STOP_LOADING,
   CREATE,
   UPDATE,
   DELETE,
@@ -19,6 +22,17 @@ export const getPosts = (page) => async (dispatch) => {
     const { data } = await api.fetchPosts(page);
     dispatch({ type: FETCH_ALL, payload: data });
     dispatch({ type: STOP_LOADING });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getPostsByUser = (username) => async (dispatch) => {
+  try {
+    dispatch({ type: START_LOADING_USER_POSTS });
+    const { data } = await api.fetchPostsByUser(username);
+    dispatch({ type: ADD_POSTS, payload: data });
+    dispatch({ type: STOP_LOADING_USER_POSTS });
   } catch (error) {
     console.log(error);
   }

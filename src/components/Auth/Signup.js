@@ -93,18 +93,21 @@ const Signup = () => {
             name="firstName"
             placeholder="First Name"
             handleChange={handleChange}
+            autoComplete="off"
           />
           <Input
             error={error.lastName ? true : false}
             name="lastName"
             placeholder="Last Name"
             handleChange={handleChange}
+            autoComplete="off"
           />
           <Input
             error={error.username ? true : false}
             name="username"
             placeholder="Username"
             handleChange={handleChange}
+            autoComplete="off"
           />
           <Input
             error={error.email ? true : false}
@@ -112,6 +115,7 @@ const Signup = () => {
             placeholder="Email"
             handleChange={handleChange}
             type="email"
+            autoComplete="off"
           />
           <Input
             error={error.password ? true : false}
@@ -121,12 +125,14 @@ const Signup = () => {
             type={showPassword ? "text" : "password"}
             showPassword={showPassword}
             handleShowPassword={handleShowPassword}
+            autoComplete="off"
           />
           <Input
             name="confirmPassword"
             placeholder="Confirm Password"
             handleChange={handleChange}
             type="password"
+            autoComplete="off"
           />
           {isLoading && (
             <div

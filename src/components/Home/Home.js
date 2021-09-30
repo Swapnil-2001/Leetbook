@@ -1,7 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { Link, useLocation, useHistory } from "react-router-dom";
-import { Button, Chip, TextField } from "@material-ui/core";
+import {
+  Button,
+  Chip,
+  TextField,
+  Select,
+  MenuItem,
+  InputLabel,
+  FormControl,
+} from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
 import SearchIcon from "@material-ui/icons/Search";
 
@@ -27,6 +35,7 @@ const Home = () => {
   const tagsQuery = query.get("tags");
   const [search, setSearch] = useState("");
   const [tags, setTags] = useState([]);
+  const [diff, setDiff] = useState("all");
   const [selected, setSelected] = useState(
     new Array(menuItems.length).fill(false)
   );
@@ -78,6 +87,15 @@ const Home = () => {
             autoComplete="off"
             onChange={(e) => setSearch(e.target.value)}
           />
+          <FormControl className={classes.formControl}>
+            <InputLabel>Difficulty</InputLabel>
+            <Select value={diff} onChange={(e) => setDiff(e.target.value)}>
+              <MenuItem value={"all"}>All</MenuItem>
+              <MenuItem value={"easy"}>Easy</MenuItem>
+              <MenuItem value={"medium"}>Medium</MenuItem>
+              <MenuItem value={"hard"}>Hard</MenuItem>
+            </Select>
+          </FormControl>
         </div>
         <div className={classes.searchTagsDiv}>
           {menuItems.map((item, index) => (

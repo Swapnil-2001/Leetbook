@@ -6,6 +6,10 @@ export default makeStyles((theme) => ({
       margin: theme.spacing(1),
     },
   },
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: 120,
+  },
   new__post__button: {
     backgroundColor: "rgba(0, 0, 0, 0.65)",
     color: "white",

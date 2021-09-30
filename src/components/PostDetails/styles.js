@@ -48,7 +48,7 @@ export default makeStyles((theme) => ({
   },
   commentsOuterContainer: {
     backgroundColor: "#F8F5F1",
-    margin: "0 75px 50px 75px",
+    margin: "0 100px 50px 100px",
     padding: "30px",
     paddingBottom: "20px",
   },

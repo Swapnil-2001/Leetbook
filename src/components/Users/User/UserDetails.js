@@ -6,6 +6,7 @@ import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import StarIcon from "@material-ui/icons/Star";
 
 import Post from "../../Posts/Post/Post";
+import userImg from "../../../images/unknown.jpg";
 import { getUser } from "../../../actions/users";
 import { getPostsByUser } from "../../../actions/posts";
 import useStyles from "./styles";
@@ -37,7 +38,7 @@ const UserDetails = () => {
       {user && (
         <div className={classes.wrapper__div}>
           <div className={classes.profileImg}>
-            <img src={user.profileImg} alt="User" />
+            <img src={user.profileImg ? user.profileImg : userImg} alt="User" />
           </div>
           <h1 className={classes.name}>{user.name}</h1>
           <h3 className={classes.username}>{user.username}</h3>

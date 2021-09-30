@@ -41,7 +41,6 @@ const Signup = () => {
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-    console.log(name === "username");
     setFormData({
       ...formData,
       [name]: name === "username" ? value.substring(0, 8) : value,

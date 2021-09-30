@@ -10,7 +10,7 @@ const EmailRedirect = (props) => {
   useEffect(() => {
     (async function () {
       const { data } = await axios.get(
-        `http://localhost:5000/users/reset/${props.match.params.id}`
+        `https://leetbook.herokuapp.com/users/reset/${props.match.params.id}`
       );
       if (data?.message === "Reset link is valid.") {
         setUserId(data.id);
@@ -20,7 +20,7 @@ const EmailRedirect = (props) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     const { data } = await axios.patch(
-      `http://localhost:5000/users/reset/${userId}`,
+      `https://leetbook.herokuapp.com/users/reset/${userId}`,
       { password: password.trim() }
     );
     setMessage(data.message);

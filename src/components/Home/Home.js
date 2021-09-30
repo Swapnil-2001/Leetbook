@@ -75,6 +75,7 @@ const Home = () => {
     setTags([]);
     setSearch("");
     setDiff("all");
+    history.push("/");
     setSelected(new Array(menuItems.length).fill(false));
   };
 

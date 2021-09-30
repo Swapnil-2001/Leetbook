@@ -41,7 +41,11 @@ const Signup = () => {
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-    setFormData({ ...formData, [name]: value });
+    console.log(name === "username");
+    setFormData({
+      ...formData,
+      [name]: name === "username" ? value.substring(0, 8) : value,
+    });
   };
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -90,6 +94,7 @@ const Signup = () => {
           </div>
           <Input
             error={error.firstName ? true : false}
+            value={formData.firstName}
             name="firstName"
             placeholder="First Name"
             handleChange={handleChange}
@@ -97,6 +102,7 @@ const Signup = () => {
           />
           <Input
             error={error.lastName ? true : false}
+            value={formData.lastName}
             name="lastName"
             placeholder="Last Name"
             handleChange={handleChange}
@@ -104,13 +110,15 @@ const Signup = () => {
           />
           <Input
             error={error.username ? true : false}
+            value={formData.username}
             name="username"
-            placeholder="Username"
+            placeholder="Username (Upto 8 characters)"
             handleChange={handleChange}
             autoComplete="off"
           />
           <Input
             error={error.email ? true : false}
+            value={formData.email}
             name="email"
             placeholder="Email"
             handleChange={handleChange}
@@ -120,6 +128,7 @@ const Signup = () => {
           <Input
             error={error.password ? true : false}
             name="password"
+            value={formData.password}
             placeholder="Password"
             handleChange={handleChange}
             type={showPassword ? "text" : "password"}
@@ -128,6 +137,7 @@ const Signup = () => {
             autoComplete="off"
           />
           <Input
+            value={formData.confirmPassword}
             name="confirmPassword"
             placeholder="Confirm Password"
             handleChange={handleChange}

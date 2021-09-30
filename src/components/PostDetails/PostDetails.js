@@ -143,7 +143,7 @@ const PostDetails = () => {
                   {moment(post.createdAt).utc().fromNow()}
                 </p>
               </div>
-              {post.creator === user?.result?._id && (
+              {post.creator === user?.result?._id ? (
                 <div
                   style={{
                     display: "flex",
@@ -197,6 +197,38 @@ const PostDetails = () => {
                       <DeleteIcon />
                     </Fab>
                   </span>
+                </div>
+              ) : (
+                <div style={{ display: "flex", marginLeft: "auto" }}>
+                  <span style={{ margin: "0 20px 0 30px" }}>
+                    <WhatsappShareButton
+                      title={`Check out this cool post created by ${post.name}!`}
+                      separator="   "
+                      url={window.location.href}
+                    >
+                      <WhatsappIcon size={32} round={true}></WhatsappIcon>
+                    </WhatsappShareButton>
+                  </span>
+                  {user?.result && (
+                    <span
+                      className={classes.icons}
+                      onClick={() => {
+                        dispatch(savePost(user?.result?._id, post._id));
+                      }}
+                    >
+                      {post?.usersWhoSaved?.includes(user?.result?._id) ? (
+                        <BookmarkIcon
+                          color="primary"
+                          style={{ cursor: "pointer", fontSize: 35 }}
+                        />
+                      ) : (
+                        <BookmarkBorderIcon
+                          color="primary"
+                          style={{ cursor: "pointer", fontSize: 35 }}
+                        />
+                      )}
+                    </span>
+                  )}
                 </div>
               )}
             </div>

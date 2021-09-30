@@ -7,11 +7,11 @@ import useStyles from "./styles";
 
 const UserInput = ({
   name,
+  value,
   handleChange,
   placeholder,
   type,
   error,
-  showPassword,
   handleShowPassword,
 }) => {
   const classes = useStyles();
@@ -22,6 +22,7 @@ const UserInput = ({
         helperText={error !== "" && error}
         style={{ width: "75%" }}
         name={name}
+        value={value}
         label={placeholder}
         onChange={handleChange}
         type={type}

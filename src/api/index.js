@@ -36,3 +36,5 @@ export const signup = (formData) => API.post("/users/signup", formData);
 export const signin = (formData, isGoogleSignIn) =>
   API.post("/users/signin", { formData, isGoogleSignIn });
 export const fetchUser = (username) => API.get(`/users/${username}`);
+export const editUser = (userId, profilePic) =>
+  API.patch(`/users/${userId}`, profilePic);

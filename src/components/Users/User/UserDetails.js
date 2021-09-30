@@ -3,6 +3,7 @@ import { CircularProgress, Button } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, Link } from "react-router-dom";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
+import EditIcon from "@material-ui/icons/Edit";
 import StarIcon from "@material-ui/icons/Star";
 
 import Post from "../../Posts/Post/Post";
@@ -39,10 +40,15 @@ const UserDetails = () => {
         <div className={classes.wrapper__div}>
           <div className={classes.profileImg}>
             <img src={user.profileImg ? user.profileImg : userImg} alt="User" />
+            {currentUser?.result?._id === user._id && (
+              <Link to="/edit">
+                <EditIcon color="primary" />
+              </Link>
+            )}
           </div>
           <h1 className={classes.name}>{user.name}</h1>
           <h3 className={classes.username}>{user.username}</h3>
-          <h3 className={classes.email}>{user.email}</h3>
+          {/* <h3 className={classes.email}>{user.email}</h3> */}
           <div
             style={{
               display: "flex",
@@ -72,7 +78,7 @@ const UserDetails = () => {
           )}
           {userPosts === null ? (
             <Button
-              style={{ margin: "30px 0", textTransform: "none" }}
+              style={{ margin: "30px 0 50px 0", textTransform: "none" }}
               onClick={() => dispatch(getPostsByUser(username))}
               variant="outlined"
               color="primary"

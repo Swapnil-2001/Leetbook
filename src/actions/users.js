@@ -1,4 +1,4 @@
-import { fetchUser } from "../api";
+import { fetchUser, editUser } from "../api";
 import {
   FETCH_USER,
   START_LOADING_USER,
@@ -17,3 +17,16 @@ export const getUser = (username) => async (dispatch) => {
     console.log(error);
   }
 };
+
+export const editProfilePic =
+  (userId, profilePic, history, username) => async (dispatch) => {
+    try {
+      dispatch({ type: START_LOADING_USER });
+      const { data } = await editUser(userId, profilePic);
+      dispatch({ type: FETCH_USER, payload: data });
+      history.push(`/users/${username}`);
+      dispatch({ type: STOP_LOADING_USER });
+    } catch (error) {
+      console.log(error);
+    }
+  };

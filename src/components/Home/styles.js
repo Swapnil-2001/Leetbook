@@ -7,7 +7,7 @@ export default makeStyles((theme) => ({
     },
   },
   formControl: {
-    margin: theme.spacing(1),
+    marginLeft: theme.spacing(5),
     minWidth: 120,
   },
   new__post__button: {

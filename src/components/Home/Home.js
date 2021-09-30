@@ -93,8 +93,16 @@ const Home = () => {
             onChange={(e) => setSearch(e.target.value)}
           />
           <FormControl className={classes.formControl}>
-            <InputLabel>Difficulty</InputLabel>
-            <Select value={diff} onChange={(e) => setDiff(e.target.value)}>
+            <InputLabel
+              style={{ marginTop: "0", color: "#4b6587", fontWeight: "600" }}
+            >
+              Difficulty
+            </InputLabel>
+            <Select
+              style={{ marginTop: "20px" }}
+              value={diff}
+              onChange={(e) => setDiff(e.target.value)}
+            >
               <MenuItem value={"all"}>All</MenuItem>
               <MenuItem value={"easy"}>Easy</MenuItem>
               <MenuItem value={"medium"}>Medium</MenuItem>

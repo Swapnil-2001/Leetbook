@@ -69,20 +69,9 @@ const UserDetails = () => {
               View Saved Posts
             </Button>
           )}
-          {isUserPostsLoading && (
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                marginTop: "70px",
-              }}
-            >
-              <CircularProgress />
-            </div>
-          )}
           {userPosts === null ? (
             <Button
-              style={{ marginTop: "30px", textTransform: "none" }}
+              style={{ margin: "30px 0", textTransform: "none" }}
               onClick={() => dispatch(getPostsByUser(username))}
               variant="outlined"
               color="primary"
@@ -99,6 +88,17 @@ const UserDetails = () => {
             <h3 style={{ margin: "40px 0", color: "#4b6587" }}>
               No posts by this user.
             </h3>
+          )}
+          {isUserPostsLoading && (
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                marginTop: "70px",
+              }}
+            >
+              <CircularProgress />
+            </div>
           )}
         </div>
       )}

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { EditorState } from "draft-js";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import {
@@ -20,6 +21,7 @@ import { REMOVE_ID } from "../../constants/actionTypes";
 import useStyles from "./styles";
 
 const Form = () => {
+  const [editorState, setEditorState] = useState(EditorState.createEmpty());
   const [selected, setSelected] = useState(
     new Array(menuItems.length).fill(false)
   );
@@ -64,6 +66,7 @@ const Form = () => {
       comments: [],
       tags: [],
     });
+    setEditorState(EditorState.createEmpty());
     setSelected(new Array(menuItems.length).fill(false));
   };
 
@@ -125,7 +128,12 @@ const Form = () => {
             })
           }
         />
-        <Editor dataToEditor={dataToEditor} setPostData={setPostData} />
+        <Editor
+          editorState={editorState}
+          setEditorState={setEditorState}
+          dataToEditor={dataToEditor}
+          setPostData={setPostData}
+        />
         <FormControl style={{ marginTop: "20px" }} component="fieldset">
           <RadioGroup
             aria-label="gender"

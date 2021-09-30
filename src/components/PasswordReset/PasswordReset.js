@@ -9,7 +9,7 @@ const PasswordReset = () => {
     event.preventDefault();
     try {
       const { data } = await axios.post(
-        "http://localhost:5000/users/resetPassword",
+        "https://leetbook.herokuapp.com/users/resetPassword",
         { email: email.trim() }
       );
       setMessage(data.message);

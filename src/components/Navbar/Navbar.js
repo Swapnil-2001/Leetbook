@@ -81,13 +81,6 @@ const Navbar = () => {
                 />{" "}
                 Profile
               </MenuItem>
-              <MenuItem className={classes.menuItem} onClick={handleClose}>
-                <AccountBoxIcon
-                  color="primary"
-                  style={{ marginRight: "10px" }}
-                />{" "}
-                My account
-              </MenuItem>
               <MenuItem
                 className={`${classes.menuItem} ${classes.logout}`}
                 onClick={logout}

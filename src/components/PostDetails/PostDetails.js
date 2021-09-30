@@ -139,7 +139,13 @@ const PostDetails = () => {
                   </span>
                 </div>
                 <p>
-                  Created by <Link to={`/users/${post.name}`}>{post.name}</Link>{" "}
+                  Created by{" "}
+                  <Link
+                    style={{ color: "#6F69AC", fontWeight: "600" }}
+                    to={`/users/${post.name}`}
+                  >
+                    {post.name}
+                  </Link>{" "}
                   {moment(post.createdAt).utc().fromNow()}
                 </p>
               </div>

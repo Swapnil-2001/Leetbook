@@ -57,10 +57,14 @@ const Home = () => {
 
   const searchPost = (event) => {
     event.preventDefault();
-    if (search.trim() || tags.length) {
-      dispatch(getPostsBySearch({ search, tags: tags.join(",") }));
+    if (search.trim() || tags.length || diff !== "all") {
+      dispatch(
+        getPostsBySearch({ search, difficulty: diff, tags: tags.join(",") })
+      );
       history.push(
-        `/posts/search?searchQuery=${search || "none"}&tags=${tags.join(",")}`
+        `/posts/search?searchQuery=${
+          search || "none"
+        }&difficulty=${diff}&tags=${tags.join(",")}`
       );
     } else {
       history.push("/");
@@ -70,6 +74,7 @@ const Home = () => {
   const clearSearches = () => {
     setTags([]);
     setSearch("");
+    setDiff("all");
     setSelected(new Array(menuItems.length).fill(false));
   };
 

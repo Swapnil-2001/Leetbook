@@ -45,7 +45,13 @@ const PostDetails = () => {
 
   useEffect(() => {
     if (post)
-      dispatch(getPostsBySearch({ search: "none", tags: post.tags.join(",") }));
+      dispatch(
+        getPostsBySearch({
+          search: "none",
+          difficulty: "all",
+          tags: post.tags.join(","),
+        })
+      );
   }, [post, dispatch]);
 
   const recommendedPosts = posts?.filter(({ _id }) => _id !== post?._id);

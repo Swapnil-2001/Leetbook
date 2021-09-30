@@ -33,11 +33,18 @@ const PasswordReset = () => {
           autoComplete="off"
           style={{ width: "30%", marginRight: "20px" }}
         />
-        <Button variant="contained" color="primary" type="submit">
-          Get Reset Link
+        <Button
+          variant="contained"
+          color="primary"
+          type="submit"
+          style={{ textTransform: "none" }}
+        >
+          Get P/W Reset Link
         </Button>
       </form>
-      {message.length > 0 && <div>{message}</div>}
+      {message.length > 0 && (
+        <h3 style={{ textAlign: "center", color: "#4b6587" }}>{message}</h3>
+      )}
     </>
   );
 };

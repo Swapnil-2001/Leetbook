@@ -6,27 +6,36 @@ import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import CheckCircleIcon from "@material-ui/icons/CheckCircle";
 
 import { editProfilePic } from "../../actions/users";
+import { getBase64 } from "../../utils/base64";
 import useStyles from "./styles";
 
 const Edit = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   const classes = useStyles();
-  const [file, setFile] = useState("");
+  const [file, setFile] = useState({ profileImg: "" });
   const { isLoading } = useSelector((state) => state.users);
   const currentUser = JSON.parse(localStorage.getItem("profile"));
   useEffect(() => {
     if (!currentUser) history.push("/");
   }, [currentUser, history]);
 
+  const handleFileUpload = async (e) => {
+    let file = e.target.files[0];
+    try {
+      let result = await getBase64(file);
+      setFile({ profileImg: result });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    const formData = new FormData();
-    formData.append("profileImg", file);
     dispatch(
       editProfilePic(
         currentUser?.result?._id,
-        formData,
+        file,
         history,
         currentUser?.result?.username
       )
@@ -47,15 +56,16 @@ const Edit = () => {
         <label className={classes.custom__file__upload}>
           <input
             type="file"
-            accept="image/png, image/jpg, image/jpeg"
-            onChange={(e) => setFile(e.target.files[0])}
+            style={{ display: "none" }}
+            accept=".jpg,.jpeg,.png"
+            onChange={handleFileUpload}
           />
           <AccountCircleIcon
             style={{ marginRight: "10px", color: "#84A9AC" }}
           />{" "}
           Change Profile Picture
         </label>
-        {file && (
+        {file.profileImg && (
           <CheckCircleIcon style={{ color: "green", marginLeft: "15px" }} />
         )}
       </div>

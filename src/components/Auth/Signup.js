@@ -6,6 +6,7 @@ import CloudUploadIcon from "@material-ui/icons/CloudUpload";
 import CheckCircleIcon from "@material-ui/icons/CheckCircle";
 
 import Input from "./input";
+import { getBase64 } from "../../utils/base64";
 import { signup } from "../../actions/auth";
 import resume from "../../images/Resume.jpg";
 import useStyles from "./styles";
@@ -22,6 +23,7 @@ const Signup = () => {
     firstName: "",
     lastName: "",
     username: "",
+    profileImg: "",
     email: "",
     password: "",
     confirmPassword: "",
@@ -46,6 +48,17 @@ const Signup = () => {
       [name]: name === "username" ? value.substring(0, 8) : value,
     });
   };
+
+  const handleFileUpload = async (e) => {
+    let file = e.target.files[0];
+    try {
+      let result = await getBase64(file);
+      setFormData({ ...formData, profileImg: result });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
     let valid = true;
@@ -56,15 +69,7 @@ const Signup = () => {
       }
     });
     if (!valid) return;
-    const userData = new FormData();
-    userData.append("profileImg", formData.profileImg);
-    userData.append("firstName", formData.firstName);
-    userData.append("lastName", formData.lastName);
-    userData.append("username", formData.username);
-    userData.append("email", formData.email);
-    userData.append("password", formData.password);
-    userData.append("confirmPassword", formData.confirmPassword);
-    dispatch(signup(userData, history));
+    dispatch(signup(formData, history));
   };
   const handleShowPassword = () => setShowPassword((prevState) => !prevState);
 
@@ -73,7 +78,7 @@ const Signup = () => {
       <div style={{ flex: "1", marginLeft: "75px" }}>
         <h1 className={classes.heading}>Sign Up</h1>
         <form onSubmit={handleSubmit}>
-          <div className={classes.file__div}>
+          {/* <div className={classes.file__div}>
             <label className={classes.custom__file__upload}>
               <input
                 type="file"
@@ -81,6 +86,23 @@ const Signup = () => {
                 onChange={(e) =>
                   setFormData({ ...formData, profileImg: e.target.files[0] })
                 }
+              />
+              <CloudUploadIcon
+                style={{ marginRight: "10px", color: "#84A9AC" }}
+              />{" "}
+              Profile Picture
+            </label>
+            {formData.profileImg && (
+              <CheckCircleIcon style={{ color: "green", marginLeft: "15px" }} />
+            )}
+          </div> */}
+          <div className={classes.file__div}>
+            <label className={classes.custom__file__upload}>
+              <input
+                type="file"
+                style={{ display: "none" }}
+                accept=".jpg,.jpeg,.png"
+                onChange={handleFileUpload}
               />
               <CloudUploadIcon
                 style={{ marginRight: "10px", color: "#84A9AC" }}

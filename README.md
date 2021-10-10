@@ -1,4 +1,4 @@
-This is a web application developed using MongoDB, Express, React and Node. Redux was used for global state management. Features include:
+Client side code for the web application developed using MongoDB, Express, React and Node. Redux was used for global state management. Features include:
 
 1. Create / edit / delete posts
 2. Authentication using Google OAuth and JWT

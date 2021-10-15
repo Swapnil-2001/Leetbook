@@ -1,18 +1,21 @@
 import axios from "axios";
 import React, { useState } from "react";
-import { TextField, Button } from "@material-ui/core";
+import { CircularProgress, TextField, Button } from "@material-ui/core";
 
 const PasswordReset = () => {
+  const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
+      setLoading(true);
       const { data } = await axios.post(
         "https://leetbook.herokuapp.com/users/resetPassword",
         { email: email.trim() }
       );
       setMessage(data.message);
+      setLoading(false);
     } catch (error) {
       console.log(error);
     }
@@ -44,6 +47,17 @@ const PasswordReset = () => {
       </form>
       {message.length > 0 && (
         <h3 style={{ textAlign: "center", color: "#4b6587" }}>{message}</h3>
+      )}
+      {loading && (
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            marginTop: "70px",
+          }}
+        >
+          <CircularProgress />
+        </div>
       )}
     </>
   );

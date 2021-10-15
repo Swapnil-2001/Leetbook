@@ -1,9 +1,10 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { TextField, Button } from "@material-ui/core";
+import { CircularProgress, TextField, Button } from "@material-ui/core";
 
 const EmailRedirect = (props) => {
+  const [loading, setLoading] = useState(false);
   const [userId, setUserId] = useState(null);
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
@@ -19,11 +20,17 @@ const EmailRedirect = (props) => {
   }, [props]);
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const { data } = await axios.patch(
-      `https://leetbook.herokuapp.com/users/reset/${userId}`,
-      { password: password.trim() }
-    );
-    setMessage(data.message);
+    try {
+      setLoading(true);
+      const { data } = await axios.patch(
+        `https://leetbook.herokuapp.com/users/reset/${userId}`,
+        { password: password.trim() }
+      );
+      setMessage(data.message);
+      setLoading(false);
+    } catch (error) {
+      console.log(error);
+    }
   };
   return (
     <>
@@ -56,6 +63,17 @@ const EmailRedirect = (props) => {
               Change Password
             </Button>
           </form>
+          {loading && (
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                marginTop: "70px",
+              }}
+            >
+              <CircularProgress />
+            </div>
+          )}
           {message.length > 0 && (
             <h3 style={{ textAlign: "center", color: "#4b6587" }}>{message}</h3>
           )}

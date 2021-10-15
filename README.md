@@ -1,3 +1,17 @@
+Client side code for the web application developed using MongoDB, Express, React and Node. Redux was used for global state management. Features include:
+
+1. Create / edit / delete posts
+2. Authentication using Google OAuth and JWT
+3. Like / comment functionality
+4. Filter posts by title, tag(s) and/or difficulty
+5. Save posts
+6. Get recommended similar posts
+7. Password reset with email confirmation using Nodemailer
+8. Share posts
+
+The UI was developed largely with the help of Material UI. 
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
